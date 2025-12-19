@@ -1,0 +1,271 @@
+/* === KHUNG CHUNG CHO CÁC TRANG LEARNER === */
+
+.learner-assessment-page,
+.learner-settings-page {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 0 48px;
+  color: #e5e7eb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/* tiêu đề lớn */
+
+.learner-assessment-page h1,
+.learner-settings-page h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  margin-bottom: 8px;
+}
+
+.learner-assessment-page h2,
+.learner-settings-page h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 24px 0 12px;
+}
+
+/* đoạn mô tả nhỏ dưới tiêu đề */
+
+.learner-page-subtitle {
+  font-size: 0.95rem;
+  color: #9ca3af;
+  max-width: 620px;
+  line-height: 1.6;
+}
+
+/* card trắng trên nền tối */
+
+.learner-card {
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 24px 24px 20px;
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(16px);
+  margin-top: 24px;
+}
+
+/* bố cục 2 cột nếu cần */
+
+.learner-two-cols {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
+  gap: 24px;
+}
+
+@media (max-width: 1024px) {
+  .learner-two-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* dòng field */
+
+.learner-field {
+  margin-bottom: 18px;
+}
+
+.learner-field label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #e5e7eb;
+  margin-bottom: 6px;
+}
+
+/* input / select / textarea chung */
+
+.learner-field input[type="text"],
+.learner-field input[type="number"],
+.learner-field select,
+.learner-field textarea {
+  width: 100%;
+  max-width: 420px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.65);
+  background: rgba(15, 23, 42, 0.7);
+  color: #e5e7eb;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.learner-field textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.learner-field input::placeholder,
+.learner-field textarea::placeholder {
+  color: #6b7280;
+}
+
+.learner-field input:focus,
+.learner-field select:focus,
+.learner-field textarea:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.7);
+  background: rgba(15, 23, 42, 0.95);
+}
+
+/* slider (range) */
+
+.learner-assessment-page input[type="range"] {
+  width: 260px;
+  accent-color: #6366f1;
+}
+
+/* text nhỏ gợi ý */
+
+.learner-hint {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: 4px;
+}
+
+/* nút chung */
+
+.learner-actions {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.learner-btn-primary,
+.learner-btn-secondary {
+  border-radius: 999px;
+  padding: 9px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease,
+    background 0.15s ease, color 0.15s ease;
+}
+
+.learner-btn-primary {
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  color: #f9fafb;
+  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.4);
+}
+
+.learner-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.55);
+}
+
+.learner-btn-secondary {
+  background: transparent;
+  color: #e5e7eb;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+}
+
+.learner-btn-secondary:hover {
+  background: rgba(15, 23, 42, 0.9);
+}
+
+/* chip chủ đề */
+
+.learner-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.learner-chip-row button {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.9);
+  font-size: 0.8rem;
+  color: #e5e7eb;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+}
+
+.learner-chip-row button:hover {
+  background: rgba(79, 70, 229, 0.2);
+  transform: translateY(-1px);
+}
+
+.learner-chip-row button.is-active {
+  background: linear-gradient(135deg, #6366f1, #22c55e);
+  border-color: transparent;
+  color: #f9fafb;
+}
+
+/* box giải thích / tips */
+
+.learner-info-block {
+  margin-top: 22px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px dashed rgba(148, 163, 184, 0.7);
+}
+
+.learner-info-block h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.learner-info-block ul {
+  padding-left: 18px;
+  margin: 0;
+  font-size: 0.88rem;
+  color: #d1d5db;
+}
+
+.learner-info-block li {
+  margin-bottom: 6px;
+}
+
+/* cột bên phải trong assessment (summary) */
+
+.learner-summary-card {
+  padding: 18px 20px;
+  border-radius: 18px;
+  background: radial-gradient(circle at top left, #6366f1 0, #020617 55%);
+  border: 1px solid rgba(129, 140, 248, 0.6);
+  color: #e5e7eb;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
+}
+
+.learner-summary-card h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.learner-summary-card p {
+  font-size: 0.9rem;
+  color: #cbd5f5;
+  margin-bottom: 10px;
+}
+/* Khung chung cho các trang learner (assessment + settings) */
+.learner-page-root {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 0 60px;
+  animation: learner-fade-in 0.35s ease-out;
+}
+
+/* Hiệu ứng xuất hiện nhẹ */
+@keyframes learner-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

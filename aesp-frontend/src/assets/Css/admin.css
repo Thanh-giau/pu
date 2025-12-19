@@ -1,0 +1,291 @@
+/* NEN CHUNG CHO KHU ADMIN */
+.admin-main {
+  /* nen tong sang hon mot chut */
+  background: radial-gradient(circle at top, #111827 0, #020617 60%);
+}
+
+/* VUNG NOI DUNG CHINH BEN PHAI */
+.admin-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 28px 40px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #f9fafb;
+}
+
+/* TIEU DE, CHU THICH */
+.admin-page h1,
+.admin-page h2 {
+  font-weight: 700;
+  color: #e5e7ff;
+  letter-spacing: 0.02em;
+}
+
+.admin-page h1 {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+.admin-page h2 {
+  font-size: 26px;
+  margin-top: 18px;
+  margin-bottom: 6px;
+}
+
+.admin-page h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #e5e7eb;
+  margin-top: 16px;
+  margin-bottom: 4px;
+}
+
+.admin-page p {
+  font-size: 14px;
+  color: #cbd5f5;
+  line-height: 1.6;
+}
+
+/* CARD NOI DUNG LON */
+.admin-section {
+  background: linear-gradient(145deg, #0b1120, #111827);
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  padding: 18px 20px;
+  margin-top: 18px;
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.85);
+}
+
+.admin-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.admin-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.admin-section-note {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* GRID THONG KE CHO TRANG BAO CAO */
+.admin-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.admin-stat-card {
+  background: radial-gradient(circle at top, #020617, #020617);
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  padding: 16px 18px;
+  box-shadow: 0 20px 42px rgba(15, 23, 42, 0.95);
+}
+
+.admin-stat-label {
+  font-size: 13px;
+  color: #c7d2fe;
+}
+
+.admin-stat-value {
+  margin-top: 6px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+/* INPUT, SELECT, TEXTAREA */
+.admin-page input[type="text"],
+.admin-page input[type="number"],
+.admin-page input[type="password"],
+.admin-page input[type="email"],
+.admin-page select,
+.admin-page textarea {
+  display: block;
+  width: 100%;
+  max-width: 520px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  background: radial-gradient(circle at top, #020617, #020617);
+  color: #e5e7eb;
+  font-size: 13px;
+  outline: none;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.95);
+}
+
+.admin-page textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+.admin-page input:focus,
+.admin-page select:focus,
+.admin-page textarea:focus {
+  border-color: #818cf8;
+  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.85),
+    0 20px 42px rgba(15, 23, 42, 1);
+}
+
+/* BUTTON CHUNG */
+.admin-page button {
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 999px;
+  border: none;
+  padding: 8px 18px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  color: #f9fafb;
+  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.9);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+.admin-page button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 20px 46px rgba(79, 70, 229, 0.98);
+}
+
+.admin-page button:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 26px rgba(79, 70, 229, 0.85);
+}
+
+.admin-page button[disabled],
+.admin-page button:disabled {
+  opacity: 0.55;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* BUTTON OUTLINE VA DANGER TRONG BANG */
+.admin-page .btn-outline,
+.admin-page button.btn-outline {
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  box-shadow: none;
+}
+
+.admin-page .btn-danger,
+.admin-page button.btn-danger {
+  background: #ef4444;
+  box-shadow: 0 10px 26px rgba(239, 68, 68, 0.85);
+}
+
+/* BANG NGUOI DUNG, GOI HOC */
+.admin-page table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+  font-size: 13px;
+  background: linear-gradient(145deg, #0f172a, #020617);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.85);
+}
+
+.admin-page thead {
+  background: #1f2937;
+}
+
+.admin-page th,
+.admin-page td {
+  padding: 9px 12px;
+  text-align: left;
+}
+
+.admin-page th {
+  font-weight: 600;
+  color: #e5e7eb;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.9);
+}
+
+.admin-page td {
+  color: #e5e7eb;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.9);
+}
+
+.admin-page tr:last-child td {
+  border-bottom: none;
+}
+
+/* HANG ZEBRA GIONG LEARNER COURSES */
+.admin-page tbody tr:nth-child(odd) {
+  background-color: rgba(15, 23, 42, 0.96);
+}
+
+.admin-page tbody tr:nth-child(even) {
+  background-color: rgba(17, 24, 39, 0.96);
+}
+
+.admin-page tbody tr:hover {
+  background-color: rgba(30, 64, 175, 0.35);
+}
+
+/* BADGE TRANG THAI */
+.admin-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(34, 197, 94, 0.16);
+  color: #bbf7d0;
+}
+
+.admin-badge.warn {
+  background: rgba(234, 179, 8, 0.2);
+  color: #fef08a;
+}
+
+.admin-badge.danger {
+  background: rgba(248, 113, 113, 0.22);
+  color: #fecaca;
+}
+
+/* LIST GIAI THICH NHO */
+.admin-page ul {
+  padding-left: 18px;
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+
+.admin-page li {
+  font-size: 14px;
+  color: #e5e7eb;
+}
+
+.admin-page li + li {
+  margin-top: 3px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .admin-page {
+    padding: 20px 16px 32px;
+  }
+
+  .admin-page h1 {
+    font-size: 26px;
+  }
+
+  .admin-page h2 {
+    font-size: 22px;
+  }
+
+  .admin-page table {
+    font-size: 12px;
+  }
+}

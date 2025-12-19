@@ -1,0 +1,278 @@
+/* Vung chung cho cac trang mentor */
+.mentor-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px 24px 40px;
+  color: #f9fafb;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* Tieu de khu */
+.mentor-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #e5e7ff;
+  margin-bottom: 4px;
+}
+
+.mentor-subtitle {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* Card section */
+.mentor-section {
+  background: radial-gradient(circle at top left, rgba(129, 140, 248, 0.16), rgba(15, 23, 42, 0.92));
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 20px 22px;
+  margin-top: 18px;
+  box-shadow: 0 22px 50px rgba(15, 23, 42, 0.8);
+}
+
+.mentor-section + .mentor-section {
+  margin-top: 20px;
+}
+
+.mentor-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.mentor-section-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+.mentor-section-note {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* Grid thong ke */
+.mentor-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.mentor-stat-card {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 64, 175, 0.65));
+  border-radius: 18px;
+  border: 1px solid rgba(129, 140, 248, 0.65);
+  padding: 16px 18px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.9);
+}
+
+.mentor-stat-label {
+  font-size: 13px;
+  color: #c7d2fe;
+}
+
+.mentor-stat-value {
+  margin-top: 6px;
+  font-size: 26px;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+/* Card hanh dong nhanh */
+.mentor-action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.mentor-action-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  background: radial-gradient(circle at top, rgba(129, 140, 248, 0.24), rgba(15, 23, 42, 0.98));
+  cursor: pointer;
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease;
+}
+
+.mentor-action-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(30, 64, 175, 0.65);
+  border-color: rgba(129, 140, 248, 0.9);
+}
+
+.mentor-action-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background: rgba(79, 70, 229, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.mentor-action-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #f9fafb;
+}
+
+.mentor-action-desc {
+  font-size: 13px;
+  color: #d1d5db;
+}
+
+/* Input / select / textarea */
+.mentor-field-group {
+  margin-bottom: 14px;
+}
+
+.mentor-label {
+  display: block;
+  font-size: 13px;
+  color: #e5e7eb;
+  margin-bottom: 4px;
+}
+
+.mentor-help {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 3px;
+}
+
+.mentor-input,
+.mentor-select,
+.mentor-textarea {
+  width: 100%;
+  font-size: 13px;
+  color: #e5e7eb;
+  background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  padding: 8px 10px;
+  outline: none;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.9);
+}
+
+.mentor-input:focus,
+.mentor-select:focus,
+.mentor-textarea:focus {
+  border-color: #818cf8;
+  box-shadow: 0 0 0 1px rgba(129, 140, 248, 0.7), 0 16px 35px rgba(15, 23, 42, 0.95);
+}
+
+.mentor-textarea {
+  min-height: 70px;
+  resize: vertical;
+}
+
+/* Button */
+.mentor-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  color: #f9fafb;
+  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.7);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+.mentor-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 42px rgba(79, 70, 229, 0.8);
+}
+
+.mentor-button:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.7);
+}
+
+.mentor-button-secondary {
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  box-shadow: none;
+}
+
+/* Badge nho */
+.mentor-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  background: rgba(129, 140, 248, 0.2);
+  color: #e5e7ff;
+}
+
+/* Bang */
+.mentor-table-wrapper {
+  overflow-x: auto;
+}
+
+.mentor-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.mentor-table th,
+.mentor-table td {
+  padding: 8px 8px;
+  vertical-align: top;
+}
+
+.mentor-table thead tr {
+  border-bottom: 1px solid rgba(148, 163, 184, 0.6);
+}
+
+.mentor-table tbody tr {
+  border-bottom: 1px solid rgba(30, 41, 59, 0.9);
+}
+
+.mentor-table th {
+  text-align: left;
+  color: #e5e7eb;
+}
+
+.mentor-table td {
+  color: #cbd5f5;
+}
+
+.mentor-table td .mentor-tag-strong {
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+/* Khoi danh sach nho */
+.mentor-list {
+  list-style: disc;
+  padding-left: 18px;
+  font-size: 13px;
+  color: #e5e7eb;
+}
+
+.mentor-list li + li {
+  margin-top: 4px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .mentor-page {
+    padding: 18px 16px 32px;
+  }
+}
