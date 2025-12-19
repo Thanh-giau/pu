@@ -1,0 +1,14 @@
+# Node modules (cho gateway, learning-service)
+node_modules/
+npm-debug.log
+
+# Python (cho ai-service)
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# OS specific
+.DS_Store
+Thumbs.db

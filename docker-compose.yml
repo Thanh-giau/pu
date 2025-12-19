@@ -1,0 +1,97 @@
+version: "3.8"
+
+services:
+  # 1. FRONTEND
+  frontend:
+    build: ./aesp-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - gateway
+
+  # 2. GATEWAY
+  gateway:
+    build: ./aesp-backend/gateway
+    ports:
+      - "5050:5000"
+    environment:
+      - PORT=5000
+      - USER_SERVICE_URL=http://user-service:5000
+      - LEARNING_SERVICE_URL=http://learning-service:5002
+      - PAYMENT_SERVICE_URL=http://payment-service:5003
+      - AI_SERVICE_URL=http://ai-service:5000
+    depends_on:
+      - user-service
+      - learning-service
+      - ai-service
+      - mysql
+      - mongo
+
+  # 3. USER SERVICE (MongoDB)
+  user-service:
+    build: ./aesp-backend/user-service
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - MONGO_URI=mongodb://mongo:27017/aesp_user
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=Admin123
+    depends_on:
+      - mongo
+
+  # 4. LEARNING SERVICE (MySQL)
+  learning-service:
+    build: ./aesp-backend/learning-service
+    ports:
+      - "5002:5002"
+    environment:
+      - PORT=5002
+      - DB_HOST=mysql
+      - DB_USER=Von
+      - DB_PASSWORD=Von123456789
+      - DB_NAME=aesp_learning
+    depends_on:
+      - mysql
+
+  # 5. PAYMENT SERVICE
+  payment-service:
+    build: ./aesp-backend/payment-service
+    ports:
+      - "5003:5003"
+    environment:
+      - PORT=5003
+
+  # 6. AI SERVICE
+  ai-service:
+    build: ./aesp-backend/ai-service
+    ports:
+      - "5004:5000"
+    volumes:
+      - ./aesp-backend/ai-service:/app
+
+  # 7. MYSQL
+  mysql:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=RootPass123
+      - MYSQL_DATABASE=user_service_db
+      - MYSQL_USER=Von
+      - MYSQL_PASSWORD=Von123456789
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  # 8. MONGO
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mysql_data:
+  mongo_data:
