@@ -1,7 +1,8 @@
+// src/pages/common/Register.jsx
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { register } from "../../services/userApi";
-import "../../pages/common/auth.css";
+import './auth.css'; // Import CSS file
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -30,64 +31,134 @@ const Register = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h2 className="auth-title">Đăng ký tài khoản học viên</h2>
-        <p className="auth-note">
-          Tài khoản <strong>Admin</strong> và <strong>Mentor</strong> được tạo bởi
-          quản trị viên.
-        </p>
+    <div className="premium-auth-container">
+      {/* Animated Background Particles */}
+      <div className="auth-particles-bg">
+        {[...Array(40)].map((_, i) => (
+          <div
+            key={i}
+            className="auth-particle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${5 + Math.random() * 10}s`
+            }}
+          />
+        ))}
+      </div>
 
-        {error && <div className="auth-error">{error}</div>}
+      {/* Background Glow */}
+      <div className="auth-bg-glow" />
 
-        <form onSubmit={handleSubmit}>
-          <div className="auth-form-row">
-            <div className="auth-input-group">
+      {/* Auth Card */}
+      <div className="premium-auth-card">
+        <div className="auth-card-glow" />
+        
+        {/* Logo & Title */}
+        <div className="auth-header">
+          <div className="auth-logo">
+            <span className="logo-icon">✨</span>
+          </div>
+          <h2 className="auth-title">Đăng ký tài khoản</h2>
+          <p className="auth-subtitle">Bắt đầu hành trình học tập của bạn</p>
+        </div>
+
+        {/* Info Banner */}
+        <div className="info-banner">
+          <span className="info-icon">ℹ️</span>
+          <div className="info-content">
+            <p className="info-text">
+              Tài khoản <strong>Admin</strong> và <strong>Mentor</strong> được tạo bởi quản trị viên.
+            </p>
+          </div>
+        </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="auth-error-banner">
+            <span className="error-icon">⚠️</span>
+            <span className="error-text">{error}</span>
+          </div>
+        )}
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label className="form-label">Tên đăng nhập</label>
+            <div className="input-wrapper">
+              <span className="input-icon">👤</span>
               <input
                 type="text"
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="auth-input"
-                placeholder="Tên đăng nhập"
+                className="premium-input"
+                placeholder="Nhập tên đăng nhập"
                 disabled={loading}
               />
             </div>
+          </div>
 
-            <div className="auth-input-group">
+          <div className="form-group">
+            <label className="form-label">Mật khẩu</label>
+            <div className="input-wrapper">
+              <span className="input-icon">🔒</span>
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="auth-input"
-                placeholder="Mật khẩu"
+                className="premium-input"
+                placeholder="Nhập mật khẩu"
                 disabled={loading}
               />
             </div>
+          </div>
 
-            <div className="auth-input-group">
-              <select className="auth-select" value="learner" disabled={true}>
+          <div className="form-group">
+            <label className="form-label">Vai trò</label>
+            <div className="input-wrapper">
+              <span className="input-icon">🎓</span>
+              <select className="premium-select" value="learner" disabled={true}>
                 <option value="learner">Học viên</option>
               </select>
             </div>
           </div>
 
-          <button type="submit" className="auth-submit" disabled={loading}>
+          <button 
+            type="submit" 
+            className="premium-submit-btn" 
+            disabled={loading}
+          >
             {loading ? (
               <>
-                <div className="auth-spinner" />
-                <span>Đăng ký...</span>
+                <div className="btn-spinner" />
+                <span>Đang đăng ký...</span>
               </>
             ) : (
-              "Đăng ký"
+              <>
+                <span>Đăng ký</span>
+                <span className="btn-arrow">→</span>
+              </>
             )}
+            <div className="btn-shine-effect" />
           </button>
         </form>
 
-        <div className="auth-link">
-          Đã có tài khoản? <Link to="/login">Đăng nhập ngay</Link>
+        {/* Footer Link */}
+        <div className="auth-footer">
+          <p className="footer-text">
+            Đã có tài khoản?{" "}
+            <Link to="/login" className="footer-link">
+              Đăng nhập ngay
+            </Link>
+          </p>
         </div>
+
+        {/* Decorative Elements */}
+        <div className="card-decoration card-decoration-1" />
+        <div className="card-decoration card-decoration-2" />
       </div>
     </div>
   );

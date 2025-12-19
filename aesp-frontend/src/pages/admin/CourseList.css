@@ -1,106 +1,288 @@
-/* ===== CourseList.css ===== */
+/* ===== CourseList.css (Premium Glass UI) ===== */
 
-/* Toàn trang */
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.10);
+  --glass-border: rgba(255, 255, 255, 0.20);
+  --text-strong: rgba(255, 255, 255, 0.95);
+  --text-soft: rgba(255, 255, 255, 0.75);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* If you CAN wrap your page with <div className="course-page"> ... </div>, keep this */
+.course-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 16px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* If you CANNOT add .course-page, this still makes the component look premium */
 .course-container {
   max-width: 900px;
-  margin: 40px auto;
-  background: #f9fafb;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  padding: 24px;
-  font-family: "Segoe UI", sans-serif;
+  width: 100%;
+  margin: 0 auto;
+  padding: 34px 30px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  position: relative;
+  border-radius: 28px;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(28px);
+  box-shadow: var(--shadow);
+
+  animation: course-card-in 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Tiêu đề */
+@keyframes course-card-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Ambient glow behind the card */
+.course-container::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 28px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.28),
+    rgba(255, 255, 255, 0.08)
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  z-index: -1;
+}
+
+.course-container:hover::before {
+  opacity: 1;
+}
+
+/* Soft glowing blobs */
+.course-container::after {
+  content: "";
+  position: absolute;
+  inset: -120px;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(240, 147, 251, 0.28), transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(79, 172, 254, 0.26), transparent 45%),
+    radial-gradient(circle at 60% 80%, rgba(16, 185, 129, 0.18), transparent 55%);
+  filter: blur(60px);
+  opacity: 0.9;
+}
+
+/* Title */
 .course-title {
-  font-size: 28px;
-  font-weight: 700;
-  color: #1e293b;
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 26px;
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+
+  background: linear-gradient(135deg, #ffffff 0%, #f0f0ff 30%, #f093fb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
-/* Form thêm khóa học */
+/* Form */
 .course-form {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 24px;
+  gap: 12px;
+  margin-bottom: 22px;
 }
 
 .course-form input {
-  padding: 10px 14px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 15px;
-  min-width: 180px;
+  min-width: 200px;
+  padding: 14px 16px;
+  border-radius: 16px;
+
+  color: var(--text-strong);
+  background: rgba(255, 255, 255, 0.10);
+  border: 2px solid rgba(255, 255, 255, 0.18);
   outline: none;
-  transition: border 0.2s;
+
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-form input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .course-form input:focus {
-  border-color: #2563eb;
+  border-color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.10);
+  transform: translateY(-2px);
 }
 
+/* Premium button */
 .course-form button {
-  background: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 20px;
+  position: relative;
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 16px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s;
-}
 
-.course-form button:hover {
-  background: #1d4ed8;
-}
-
-/* Bảng danh sách */
-.course-table {
-  width: 100%;
-  border-collapse: collapse;
+  font-weight: 800;
   font-size: 15px;
-  background: white;
-  border-radius: 8px;
+  color: #764ba2;
+  background: linear-gradient(135deg, #ffffff 0%, #f2f2f2 100%);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.28);
+
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
   overflow: hidden;
 }
 
+.course-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 55px rgba(0, 0, 0, 0.38);
+}
+
+.course-form button:active {
+  transform: translateY(-1px);
+}
+
+.course-form button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: -120%;
+  background: linear-gradient(90deg, transparent, rgba(106, 17, 203, 0.22), transparent);
+  animation: course-shine 3s infinite;
+}
+
+@keyframes course-shine {
+  0% {
+    left: -120%;
+  }
+  55%,
+  100% {
+    left: 120%;
+  }
+}
+
+/* Table wrapper feel */
+.course-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+/* Header */
 .course-table th {
-  background: #e2e8f0;
-  color: #1e293b;
+  padding: 14px 14px;
   text-align: left;
-  padding: 10px;
-  border-bottom: 2px solid #cbd5e1;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+
+  color: rgba(255, 255, 255, 0.92) !important;
+  background: rgba(255, 255, 255, 0.10);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
 
+/* Cells */
 .course-table td {
-  padding: 10px;
-  border-bottom: 1px solid #e2e8f0;
+  padding: 14px 14px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.88) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
 }
 
-.course-table tr:hover {
-  background: #f1f5f9;
+/* Row hover + zebra */
+.course-table tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.03);
 }
 
-/* Nút hành động */
+.course-table tr:hover td {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Delete button */
 .delete-btn {
-  background: #ef4444;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  padding: 6px 14px;
+  border: 0;
+  border-radius: 14px;
+  padding: 10px 14px;
   cursor: pointer;
-  transition: background 0.2s;
+
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.95), rgba(220, 38, 38, 0.95));
+  box-shadow: 0 10px 25px rgba(239, 68, 68, 0.25);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .delete-btn:hover {
-  background: #dc2626;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 35px rgba(239, 68, 68, 0.35);
+  filter: brightness(1.03);
 }
 
+.delete-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Remove your old forced black text rule */
 .course-table th,
 .course-table td {
-  color: #000000 !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .course-container {
+    padding: 26px 18px;
+    border-radius: 22px;
+  }
+
+  .course-title {
+    font-size: 1.6rem;
+  }
+
+  .course-form input {
+    min-width: 100%;
+  }
+
+  .course-form button {
+    width: 100%;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .course-container,
+  .course-form button::after {
+    animation: none !important;
+  }
+
+  .course-container,
+  .course-form input,
+  .course-form button,
+  .delete-btn {
+    transition: none !important;
+  }
 }

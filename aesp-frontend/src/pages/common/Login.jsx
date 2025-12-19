@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { login } from "../../services/userApi";
-import "./auth.css";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -19,7 +18,6 @@ const Login = () => {
     try {
       const data = await login(username, password);
       const account = data.user || data;
-
       const role = account.role;
 
       if (role === "admin") {
@@ -53,60 +51,112 @@ const Login = () => {
   }, [username, password, loading]);
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h2 className="auth-title">Đăng nhập</h2>
+    <div className="premium-auth-container">
+      <div className="auth-particles-bg">
+        {[...Array(40)].map((_, i) => (
+          <div
+            key={i}
+            className="auth-particle"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${5 + Math.random() * 10}s`,
+            }}
+          />
+        ))}
+      </div>
 
-        {error && <div className="auth-error">{error}</div>}
+      <div className="auth-bg-glow" />
 
-        <form onSubmit={handleSubmit}>
-          <div className="auth-form-row">
-            <div className="auth-input-group">
+      <div className="premium-auth-card">
+        <div className="auth-card-glow" />
+
+        <div className="auth-header">
+          <div className="auth-logo">
+            <span className="logo-icon">🎓</span>
+          </div>
+          <h2 className="auth-title">Đăng nhập</h2>
+          <p className="auth-subtitle">Chào mừng bạn trở lại!</p>
+        </div>
+
+        {error && (
+          <div className="auth-error-banner">
+            <span className="error-icon">⚠️</span>
+            <span className="error-text">{error}</span>
+          </div>
+        )}
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label className="form-label">Tên đăng nhập</label>
+            <div className="input-wrapper">
+              <span className="input-icon">👤</span>
               <input
                 type="text"
                 required
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="auth-input"
-                placeholder="Tên đăng nhập"
+                className="premium-input"
+                placeholder="Nhập tên đăng nhập"
                 disabled={loading}
               />
             </div>
+          </div>
 
-            <div className="auth-input-group">
+          <div className="form-group">
+            <label className="form-label">Mật khẩu</label>
+            <div className="input-wrapper">
+              <span className="input-icon">🔒</span>
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="auth-input"
-                placeholder="Mật khẩu"
+                className="premium-input"
+                placeholder="Nhập mật khẩu"
                 disabled={loading}
               />
             </div>
+          </div>
 
-            <div className="auth-input-group">
-              <select className="auth-select" value="auto" disabled={true}>
+          <div className="form-group">
+            <label className="form-label">Vai trò</label>
+            <div className="input-wrapper">
+              <span className="input-icon">🎯</span>
+              <select className="premium-select" value="auto" disabled>
                 <option value="auto">Tự động theo tài khoản</option>
               </select>
             </div>
           </div>
 
-          <button type="submit" className="auth-submit" disabled={loading}>
+          <button type="submit" className="premium-submit-btn" disabled={loading}>
             {loading ? (
               <>
-                <div className="auth-spinner" />
-                <span>Đăng nhập...</span>
+                <div className="btn-spinner" />
+                <span>Đang đăng nhập...</span>
               </>
             ) : (
-              "Đăng nhập"
+              <>
+                <span>Đăng nhập</span>
+                <span className="btn-arrow">→</span>
+              </>
             )}
+            <div className="btn-shine-effect" />
           </button>
         </form>
 
-        <div className="auth-link">
-          Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
+        <div className="auth-footer">
+          <p className="footer-text">
+            Chưa có tài khoản?{" "}
+            <Link to="/register" className="footer-link">
+              Đăng ký ngay
+            </Link>
+          </p>
         </div>
+
+        <div className="card-decoration card-decoration-1" />
+        <div className="card-decoration card-decoration-2" />
       </div>
     </div>
   );
