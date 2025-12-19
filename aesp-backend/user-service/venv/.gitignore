@@ -1,14 +1,14 @@
-# Node modules (cho gateway, learning-service)
+# Chặn thư viện Node.js ở mọi nơi
 node_modules/
-npm-debug.log
+**/node_modules/
 
-# Python (cho ai-service)
-__pycache__/
-*.py[cod]
-*$py.class
-venv/
+# Chặn file môi trường và log hệ thống
 .env
+npm-debug.log
+yarn-error.log
 
-# OS specific
-.DS_Store
-Thumbs.db
+# Chặn thư viện Python (Backend)
+venv/
+**/venv/
+__pycache__/
+**/*.pyc
