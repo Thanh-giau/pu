@@ -4,6 +4,8 @@ import { getCurrentUser } from "../../services/userApi";
 import axios from "axios";
 import "./learner-pages.css";
 
+
+
 const API_BASE = "http://localhost:5050";
 
 const Settings = () => {
@@ -49,7 +51,7 @@ const Settings = () => {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="learner-settings space-y-8">
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
         <div>

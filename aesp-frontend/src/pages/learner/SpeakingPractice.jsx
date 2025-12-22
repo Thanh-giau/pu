@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { chatWithAi } from "../../services/aiApi";
+import "./styles/learner-speaking.css";
+
 
 const SpeakingPractice = () => {
   const [input, setInput] = useState("");
@@ -47,7 +49,7 @@ const SpeakingPractice = () => {
   };
 
   return (
-    <div>
+    <div className="learner-speaking">
       <h1>Luyện nói Tiếng Anh với AI</h1>
       <p>
         Chat với AI để luyện nói. AI sẽ sửa lỗi và đưa gợi ý tự nhiên hơn, giống

@@ -1,0 +1,185 @@
+.learner-dashboard{
+  position:relative;
+}
+
+/* HERO: parallax giả lập bằng background + animation gradient */
+.learner-dashboard > div:first-child{
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.10);
+  transform-style: preserve-3d;
+}
+
+.learner-dashboard > div:first-child::before{
+  content:"Nền tảng AI #1";
+  position:absolute;
+  top:18px;
+  left:18px;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.18);
+  box-shadow: 0 14px 30px rgba(99,102,241,.18);
+  animation: lx-float 2.6s ease-in-out infinite;
+}
+
+.learner-dashboard > div:first-child::after{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background:
+    radial-gradient(420px 220px at 20% 20%, rgba(255,255,255,.16), transparent 60%),
+    radial-gradient(520px 260px at 70% 70%, rgba(99,102,241,.20), transparent 60%),
+    radial-gradient(520px 260px at 40% 80%, rgba(34,197,94,.14), transparent 60%);
+  opacity:.9;
+  filter: blur(16px);
+  animation: lx-bg-shift 6s cubic-bezier(.2,.9,.2,1) infinite;
+  pointer-events:none;
+}
+
+@keyframes lx-float{
+  0%{ transform: translateY(0); }
+  50%{ transform: translateY(-6px); }
+  100%{ transform: translateY(0); }
+}
+@keyframes lx-bg-shift{
+  0%{ transform: translate3d(0,0,0) scale(1); }
+  50%{ transform: translate3d(10px,-10px,0) scale(1.03); }
+  100%{ transform: translate3d(0,0,0) scale(1); }
+}
+
+/* Gradient text auto run (title inside hero) */
+.learner-dashboard > div:first-child h2{
+  background: linear-gradient(90deg, #ffffff, rgba(255,255,255,.65), #ffffff);
+  background-size: 220% 100%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation: lx-text-gradient 3.8s linear infinite;
+  position:relative;
+  z-index:1;
+}
+@keyframes lx-text-gradient{
+  0%{ background-position: 0% 0; }
+  100%{ background-position: 200% 0; }
+}
+
+/* Scroll indicator nhỏ góc dưới hero */
+.learner-dashboard > div:first-child{
+  padding-bottom:34px;
+}
+.learner-dashboard > div:first-child .lx-scroll-indicator{
+  display:none;
+}
+.learner-dashboard > div:first-child::marker{ content:""; }
+
+.learner-dashboard > div:first-child::before,
+.learner-dashboard > div:first-child h2,
+.learner-dashboard > div:first-child p,
+.learner-dashboard > div:first-child button,
+.learner-dashboard > div:first-child .grid{
+  position:relative;
+  z-index:1;
+}
+
+/* Stats cards (4 ô trong hero) */
+.learner-dashboard > div:first-child .grid > div{
+  border:1px solid rgba(255,255,255,.12);
+  box-shadow: 0 18px 40px rgba(0,0,0,.22);
+  transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s cubic-bezier(.2,.9,.2,1);
+}
+.learner-dashboard > div:first-child .grid > div:hover{
+  transform: translateY(-6px) scale(1.05);
+  box-shadow: 0 22px 50px rgba(99,102,241,.18);
+}
+.learner-dashboard > div:first-child .grid > div::after{
+  content:"";
+  position:absolute;
+  left:14px;
+  right:14px;
+  bottom:10px;
+  height:2px;
+  border-radius:999px;
+  background: linear-gradient(90deg, rgba(99,102,241,.0), rgba(255,255,255,.55), rgba(34,197,94,.0));
+  opacity:0;
+  transform: translateY(6px);
+  transition: opacity .28s cubic-bezier(.2,.9,.2,1), transform .28s cubic-bezier(.2,.9,.2,1);
+}
+.learner-dashboard > div:first-child .grid > div:hover::after{
+  opacity:1;
+  transform: translateY(0);
+}
+
+/* Quick action cards + Practice cards: 3D hover + arrow */
+.learner-dashboard .grid > div.bg-white{
+  background: rgba(255,255,255,.06) !important;
+  border:1px solid rgba(255,255,255,.10) !important;
+  box-shadow: 0 18px 40px rgba(0,0,0,.22);
+  backdrop-filter: blur(10px);
+  transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s cubic-bezier(.2,.9,.2,1);
+  transform-style: preserve-3d;
+  position:relative;
+  overflow:hidden;
+}
+
+.learner-dashboard .grid > div.bg-white::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  background:
+    radial-gradient(240px 140px at 20% 20%, rgba(99,102,241,.22), transparent 60%),
+    radial-gradient(240px 140px at 80% 80%, rgba(34,197,94,.16), transparent 60%);
+  opacity:.6;
+  filter: blur(18px);
+  pointer-events:none;
+}
+
+.learner-dashboard .grid > div.bg-white:hover{
+  transform: translateY(-8px) rotateX(7deg);
+  box-shadow: 0 26px 60px rgba(99,102,241,.14);
+}
+
+/* Arrow xuất hiện */
+.learner-dashboard .grid > div.bg-white button{
+  position:relative;
+}
+.learner-dashboard .grid > div.bg-white button::after{
+  content:"→";
+  margin-left:10px;
+  opacity:0;
+  transform: translateX(-6px);
+  display:inline-block;
+  transition: opacity .22s var(--lx-ease), transform .22s var(--lx-ease);
+}
+.learner-dashboard .grid > div.bg-white:hover button::after{
+  opacity:1;
+  transform: translateX(0);
+}
+
+/* Badge "🔥 Phổ biến" cho card giữa của quickActions (card thứ 2 trong grid 3 cột) */
+@media (min-width: 768px){
+  .learner-dashboard > div:nth-of-type(2) .grid > div:nth-child(2)::after{
+    content:"🔥 Phổ biến";
+    position:absolute;
+    top:14px;
+    right:14px;
+    padding:6px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:800;
+    background: rgba(251,191,36,.14);
+    border:1px solid rgba(251,191,36,.35);
+    color:#fde68a;
+  }
+}
+
+/* Responsive stats: mobile 2 columns */
+@media (max-width: 640px){
+  .learner-dashboard > div:first-child .grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}

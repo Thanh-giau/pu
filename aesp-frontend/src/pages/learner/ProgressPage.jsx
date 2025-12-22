@@ -1,5 +1,7 @@
 // src/pages/learner/ProgressPage.jsx
 import React, { useEffect, useState } from "react";
+import "./styles/learner-progress-page.css";
+
 import {
   getProgressSummary,
   getLeaderboard,
@@ -61,7 +63,7 @@ const ProgressPage = () => {
   const cells = buildHeatmapCells(summary?.summaryByDay || []);
 
   return (
-    <div className="admin-page-container">
+    <div className="admin-page-container learner-progress-page">
       <h1 className="admin-page-title">Tiến độ học tập</h1>
 
       {loading && (

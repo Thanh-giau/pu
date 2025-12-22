@@ -1,271 +1,327 @@
-/* === KHUNG CHUNG CHO CÁC TRANG LEARNER === */
+/* ===== LearnerLayout.css - Layout Only + Effects ===== */
 
-.learner-assessment-page,
-.learner-settings-page {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 32px 0 48px;
-  color: #e5e7eb;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
+:root {
+  --bg-dark: #0f172a;
+  --sidebar-width: 280px;
+  --header-height: 80px;
+
+  --primary-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-surface: rgba(255, 255, 255, 0.05);
+  --glass-highlight: rgba(255, 255, 255, 0.1);
+
+  --text-main: #f8fafc;
+  --text-secondary: #94a3b8;
+
+  --success-color: #10b981;
 }
 
-/* tiêu đề lớn */
-
-.learner-assessment-page h1,
-.learner-settings-page h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  margin-bottom: 8px;
+/* ===== Root layout ===== */
+.dashboard-root {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  background-image: radial-gradient(circle at 50% 0%, #1e1b4b 0%, #0f172a 60%);
+  color: var(--text-main);
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
 }
 
-.learner-assessment-page h2,
-.learner-settings-page h2 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin: 24px 0 12px;
-}
-
-/* đoạn mô tả nhỏ dưới tiêu đề */
-
-.learner-page-subtitle {
-  font-size: 0.95rem;
-  color: #9ca3af;
-  max-width: 620px;
-  line-height: 1.6;
-}
-
-/* card trắng trên nền tối */
-
-.learner-card {
+/* ===== Sidebar ===== */
+.dashboard-sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
   background: rgba(15, 23, 42, 0.85);
-  border-radius: 18px;
-  border: 1px solid rgba(148, 163, 184, 0.35);
-  padding: 24px 24px 20px;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.6);
-  backdrop-filter: blur(16px);
-  margin-top: 24px;
-}
-
-/* bố cục 2 cột nếu cần */
-
-.learner-two-cols {
-  display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr);
-  gap: 24px;
-}
-
-@media (max-width: 1024px) {
-  .learner-two-cols {
-    grid-template-columns: minmax(0, 1fr);
-  }
-}
-
-/* dòng field */
-
-.learner-field {
-  margin-bottom: 18px;
-}
-
-.learner-field label {
-  display: block;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #e5e7eb;
-  margin-bottom: 6px;
-}
-
-/* input / select / textarea chung */
-
-.learner-field input[type="text"],
-.learner-field input[type="number"],
-.learner-field select,
-.learner-field textarea {
-  width: 100%;
-  max-width: 420px;
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.65);
-  background: rgba(15, 23, 42, 0.7);
-  color: #e5e7eb;
-  font-size: 0.95rem;
-  outline: none;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease,
-    background-color 0.15s ease;
-}
-
-.learner-field textarea {
-  min-height: 80px;
-  resize: vertical;
-}
-
-.learner-field input::placeholder,
-.learner-field textarea::placeholder {
-  color: #6b7280;
-}
-
-.learner-field input:focus,
-.learner-field select:focus,
-.learner-field textarea:focus {
-  border-color: #6366f1;
-  box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.7);
-  background: rgba(15, 23, 42, 0.95);
-}
-
-/* slider (range) */
-
-.learner-assessment-page input[type="range"] {
-  width: 260px;
-  accent-color: #6366f1;
-}
-
-/* text nhỏ gợi ý */
-
-.learner-hint {
-  font-size: 0.8rem;
-  color: #9ca3af;
-  margin-top: 4px;
-}
-
-/* nút chung */
-
-.learner-actions {
-  margin-top: 20px;
+  border-right: 1px solid var(--glass-border);
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+  flex-direction: column;
+  padding: 1.5rem;
+  z-index: 50;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(12px);
 }
 
-.learner-btn-primary,
-.learner-btn-secondary {
-  border-radius: 999px;
-  padding: 9px 20px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  transition: transform 0.12s ease, box-shadow 0.12s ease,
-    background 0.15s ease, color 0.15s ease;
-}
-
-.learner-btn-primary {
-  background: linear-gradient(135deg, #6366f1, #a855f7);
-  color: #f9fafb;
-  box-shadow: 0 12px 30px rgba(79, 70, 229, 0.4);
-}
-
-.learner-btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 16px 40px rgba(79, 70, 229, 0.55);
-}
-
-.learner-btn-secondary {
-  background: transparent;
-  color: #e5e7eb;
-  border: 1px solid rgba(148, 163, 184, 0.7);
-}
-
-.learner-btn-secondary:hover {
-  background: rgba(15, 23, 42, 0.9);
-}
-
-/* chip chủ đề */
-
-.learner-chip-row {
+.sidebar-header {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 6px;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--glass-border);
 }
 
-.learner-chip-row button {
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.6);
-  background: rgba(15, 23, 42, 0.9);
-  font-size: 0.8rem;
-  color: #e5e7eb;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
+.logo-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--primary-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.3);
 }
 
-.learner-chip-row button:hover {
-  background: rgba(79, 70, 229, 0.2);
-  transform: translateY(-1px);
-}
-
-.learner-chip-row button.is-active {
-  background: linear-gradient(135deg, #6366f1, #22c55e);
-  border-color: transparent;
-  color: #f9fafb;
-}
-
-/* box giải thích / tips */
-
-.learner-info-block {
-  margin-top: 22px;
-  padding: 18px 20px;
-  border-radius: 16px;
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px dashed rgba(148, 163, 184, 0.7);
-}
-
-.learner-info-block h3 {
-  font-size: 1rem;
+.logo-title {
+  font-size: 1.25rem;
   font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.learner-info-block ul {
-  padding-left: 18px;
   margin: 0;
-  font-size: 0.88rem;
-  color: #d1d5db;
+  background: linear-gradient(to right, #fff, #cbd5e1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.learner-info-block li {
-  margin-bottom: 6px;
+.logo-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
 }
 
-/* cột bên phải trong assessment (summary) */
-
-.learner-summary-card {
-  padding: 18px 20px;
-  border-radius: 18px;
-  background: radial-gradient(circle at top left, #6366f1 0, #020617 55%);
-  border: 1px solid rgba(129, 140, 248, 0.6);
-  color: #e5e7eb;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.8);
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
 }
 
-.learner-summary-card h3 {
-  font-size: 1rem;
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.875rem 1rem;
+  border-radius: 12px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  transform: translateX(4px);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+}
+
+.sidebar-link.active {
+  background: var(--primary-gradient);
+  color: #fff;
+  box-shadow: 0 10px 30px rgba(99, 102, 241, 0.22);
+  font-weight: 600;
+}
+
+.sidebar-logout {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(239, 68, 68, 0.1);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.sidebar-logout:hover {
+  background: rgba(239, 68, 68, 0.2);
+  transform: translateY(-2px);
+}
+
+/* ===== Main area ===== */
+.dashboard-main {
+  flex: 1;
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: calc(100% - var(--sidebar-width));
+}
+
+/* Glow layers (để parallax có tác dụng) */
+.dashboard-main::before,
+.dashboard-main::after {
+  content: "";
+  position: fixed;
+  inset: -20vh -10vw auto -10vw;
+  height: 60vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.65;
+}
+
+.dashboard-main::before {
+  background:
+    radial-gradient(closest-side at 30% 35%, rgba(99, 102, 241, 0.28), rgba(0,0,0,0)),
+    radial-gradient(closest-side at 70% 20%, rgba(168, 85, 247, 0.22), rgba(0,0,0,0));
+  filter: blur(18px);
+  transform: translate3d(0, 0, 0);
+}
+
+.dashboard-main::after {
+  top: auto;
+  bottom: -25vh;
+  height: 55vh;
+  background:
+    radial-gradient(closest-side at 40% 60%, rgba(16, 185, 129, 0.16), rgba(0,0,0,0)),
+    radial-gradient(closest-side at 75% 75%, rgba(59, 130, 246, 0.14), rgba(0,0,0,0));
+  filter: blur(22px);
+  transform: translate3d(0, 0, 0);
+}
+
+.dashboard-header {
+  height: var(--header-height);
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.dashboard-title {
+  font-size: 1.5rem;
   font-weight: 700;
-  margin-bottom: 6px;
+  margin: 0;
+  color: var(--text-main);
 }
 
-.learner-summary-card p {
-  font-size: 0.9rem;
-  color: #cbd5f5;
-  margin-bottom: 10px;
+.dashboard-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0;
 }
-/* Khung chung cho các trang learner (assessment + settings) */
-.learner-page-root {
-  max-width: 1100px;
+
+.dashboard-user-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.dashboard-user-card:hover {
+  background: var(--glass-highlight);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-1px);
+}
+
+.user-stats {
+  text-align: right;
+  padding-right: 1rem;
+  border-right: 1px solid var(--glass-border);
+}
+
+.user-stat-value { font-weight: 700; color: #fff; }
+.user-stat-label { font-size: 0.75rem; color: var(--text-secondary); }
+
+.user-info { display: flex; align-items: center; gap: 0.75rem; }
+
+.user-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #10b981, #3b82f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.1);
+}
+
+.hidden-mobile { display: block; }
+
+/* Wrapper cho nội dung */
+.learner-page-container {
+  padding: 2rem;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 32px 0 60px;
-  animation: learner-fade-in 0.35s ease-out;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 0.5s ease;
 }
 
-/* Hiệu ứng xuất hiện nhẹ */
-@keyframes learner-fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
+/* Mobile toggle */
+.sidebar-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+}
+
+.sidebar-overlay { display: none; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .dashboard-sidebar { transform: translateX(-100%); }
+  .dashboard-sidebar.open {
+    transform: translateX(0);
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  .dashboard-main { margin-left: 0; width: 100%; }
+  .sidebar-toggle { display: block; margin-right: 1rem; }
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 45;
+    backdrop-filter: blur(4px);
   }
+  .user-stats { display: none; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Reveal animation */
+.lx-reveal{
+  opacity: 0;
+  transform: translateY(12px) scale(0.99);
+  filter: blur(2px);
+  transition:
+    opacity .45s cubic-bezier(.2,.9,.2,1),
+    transform .45s cubic-bezier(.2,.9,.2,1),
+    filter .45s cubic-bezier(.2,.9,.2,1);
+  will-change: opacity, transform, filter;
+}
+
+.lx-reveal.is-inview{
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+/* Parallax */
+.dashboard-main::after{
+  transform: translate3d(0, var(--lx-parallax-y, 0px), 0) scale(1);
+}
+
+.dashboard-main::before{
+  transform: translate3d(0, calc(var(--lx-parallax-y2, 0px) * -1), 0);
 }

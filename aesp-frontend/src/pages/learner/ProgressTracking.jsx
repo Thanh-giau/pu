@@ -1,5 +1,7 @@
 // src/pages/learner/ProgressTracking.jsx
 import React, { useEffect, useState } from "react";
+import "./styles/learner-progress-tracking.css";
+
 import {
   getProgressByUser,
   addProgress,
@@ -155,7 +157,7 @@ const ProgressTracking = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-50 rounded-xl shadow-md">
+    <div className="learner-progress-tracking p-6 bg-gray-50 rounded-xl shadow-md">
       <h2 className="text-2xl font-bold mb-4 text-blue-700">
         📊 Theo dõi tiến độ học tập
       </h2>

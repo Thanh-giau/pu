@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { CreditCard, CheckCircle, AlertCircle, Clock } from "lucide-react";
 import { getPaymentsByUser, createPayment } from "../../services/paymentApi";
 import { getCurrentUser } from "../../services/userApi";
+import "./styles/learner-payment.css";
+
 
 const recommendedPackages = [
   {
@@ -130,7 +132,7 @@ const Payment = () => {
     .reduce((sum, t) => sum + (t.amount || 0), 0);
 
   return (
-    <div className="p-6 space-y-8 text-white">
+    <div className="learner-payment p-6 space-y-8 text-white">
       <div className="flex items-center gap-3 mb-2">
         <CreditCard className="w-7 h-7 text-indigo-300" />
         <div>

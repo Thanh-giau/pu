@@ -1,4 +1,5 @@
 // src/pages/learner/LearnerDashboard.jsx
+import "./styles/learner-dashboard.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -42,7 +43,7 @@ const LearnerDashboard = () => {
   ];
 
   return (
-    <div className="space-y-8">
+    <div className="learner-dashboard space-y-8">
       {/* Hàng đầu: card lớn đánh giá */}
       <div className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-6 md:p-8 text-white flex flex-col md:flex-row md:items-center md:justify-between gap-6 shadow-lg">
         <div>

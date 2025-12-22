@@ -7,6 +7,8 @@ import {
 } from "../../services/learningApi";
 import { getCurrentUser } from "../../services/userApi";
 import "../admin/CourseList.css";
+import "./styles/learner-courses.css";
+
 
 const CourseList = () => {
   const [courses, setCourses] = useState([]);
@@ -82,7 +84,7 @@ const CourseList = () => {
   };
 
   return (
-    <div className="course-list-container">
+    <div className="course-list-container learner-courses">
       <h2 className="course-list-title">Gói học dành cho bạn</h2>
 
       {loading && (

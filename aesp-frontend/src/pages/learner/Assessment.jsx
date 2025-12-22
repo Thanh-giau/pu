@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../services/userApi";
 import axios from "axios";
 import "./learner-pages.css";
+import "./styles/learner-assessment.css";
+
 
 const API_BASE = "http://localhost:5050";
 
@@ -48,7 +50,7 @@ const Assessment = () => {
   };
 
   return (
-    <div className="learner-page-root space-y-8">
+    <div className="learner-page-root learner-assessment space-y-8">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
