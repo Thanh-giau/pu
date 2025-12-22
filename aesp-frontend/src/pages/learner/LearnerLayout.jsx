@@ -11,9 +11,11 @@ import {
   LogOut,
   Menu,
   X,
+  User,
 } from "lucide-react";
-import "../../assets/Css/dashboard.css";
-import "../../assets/Css/learner.css";
+
+// --- Import file CSS mới tạo ---
+import "./LearnerLayout.css"; 
 
 const LearnerLayout = () => {
   const user = getCurrentUser();
@@ -22,9 +24,9 @@ const LearnerLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const menuItems = [
-    { icon: Home, label: "Dashboard", path: "/learner" },
+    { icon: Home, label: "Tổng quan", path: "/learner" },
     { icon: BookOpen, label: "Khóa học", path: "/learner/courses" },
-    { icon: Mic, label: "Luyện nói", path: "/learner/speaking" },
+    { icon: Mic, label: "Luyện nói AI", path: "/learner/speaking" },
     { icon: BarChart2, label: "Tiến độ", path: "/learner/progress" },
     { icon: CreditCard, label: "Thanh toán", path: "/learner/payment" },
     { icon: Settings, label: "Cài đặt", path: "/learner/settings" },
@@ -37,13 +39,13 @@ const LearnerLayout = () => {
 
   return (
     <div className="dashboard-root">
-      {/* Sidebar */}
+      {/* ===== SIDEBAR ===== */}
       <aside className={`dashboard-sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="sidebar-header">
           <div className="logo-circle">A</div>
           <div>
             <h1 className="logo-title">AESP</h1>
-            <p className="logo-subtitle">Learner Portal</p>
+            <p className="logo-subtitle">Learner Space</p>
           </div>
         </div>
 
@@ -58,8 +60,8 @@ const LearnerLayout = () => {
                 className={`sidebar-link ${isActive ? "active" : ""}`}
                 onClick={() => setSidebarOpen(false)}
               >
-                <Icon />
-                {item.label}
+                <Icon size={20} />
+                <span>{item.label}</span>
               </Link>
             );
           })}
@@ -67,10 +69,11 @@ const LearnerLayout = () => {
 
         <button className="sidebar-logout" onClick={handleLogout}>
           <LogOut size={18} />
-          Đăng xuất
+          <span>Đăng xuất</span>
         </button>
       </aside>
 
+      {/* Mobile Overlay */}
       {sidebarOpen && (
         <div
           className="sidebar-overlay"
@@ -78,44 +81,46 @@ const LearnerLayout = () => {
         />
       )}
 
-      {/* Main */}
-      <main className="dashboard-main learner-main">
+      {/* ===== MAIN CONTENT ===== */}
+      <main className="dashboard-main">
+        {/* Header */}
         <header className="dashboard-header">
-          <button
-            className="sidebar-toggle"
-            onClick={() => setSidebarOpen((v) => !v)}
-          >
-            {sidebarOpen ? <X /> : <Menu />}
-          </button>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <button
+              className="sidebar-toggle"
+              onClick={() => setSidebarOpen((v) => !v)}
+            >
+              {sidebarOpen ? <X /> : <Menu />}
+            </button>
 
-          <div>
-            <h1 className="dashboard-title">Dashboard</h1>
-            <p className="dashboard-subtitle">
-              Trung tâm học tập cá nhân của bạn.
-            </p>
+            <div>
+              <h1 className="dashboard-title">Dashboard</h1>
+              <p className="dashboard-subtitle">Chào mừng trở lại!</p>
+            </div>
           </div>
 
+          {/* User Widget */}
           <div className="dashboard-user-card">
             <div className="user-stats">
-              <div className="user-stat-value">1</div>
+              <div className="user-stat-value">Level 1</div>
               <div className="user-stat-label">Học viên</div>
             </div>
             <div className="user-info">
               <div className="user-avatar">
-                {user?.username?.[0]?.toUpperCase() || "A"}
+                {user?.username?.[0]?.toUpperCase() || <User size={20} />}
               </div>
-              <div>
-                <p className="font-medium">
+              <div className="hidden-mobile">
+                <p className="font-medium" style={{margin:0, fontSize: '0.9rem', fontWeight: 600}}>
                   {user?.username || "Learner"}
                 </p>
-                <p className="text-sm text-emerald-300">Học viên</p>
+                <p style={{margin:0, fontSize: '0.75rem', color: '#10b981'}}>Online</p>
               </div>
             </div>
           </div>
         </header>
 
-        {/* Wrapper cho tất cả các trang con */}
-        <div className="learner-page">
+        {/* Page Content */}
+        <div className="learner-page-container">
           <Outlet />
         </div>
       </main>

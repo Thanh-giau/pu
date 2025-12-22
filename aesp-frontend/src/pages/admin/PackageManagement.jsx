@@ -4,7 +4,7 @@ import {
   addCourse,
   deleteCourse,
 } from "../../services/learningApi";
-import "./CourseList.css";
+import './AdminPremium.css';
 
 const PackageManagement = () => {
   const [courses, setCourses] = useState([]);

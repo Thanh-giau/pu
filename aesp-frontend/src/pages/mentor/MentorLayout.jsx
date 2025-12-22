@@ -9,9 +9,11 @@ import {
   LogOut,
   Menu,
   X,
+  GraduationCap,
 } from "lucide-react";
-import "../../assets/Css/dashboard.css";
-import "../../assets/Css/mentor.css";
+
+// --- Import file CSS mới ---
+import "./MentorLayout.css";
 
 const MentorLayout = () => {
   const user = getCurrentUser();
@@ -21,7 +23,7 @@ const MentorLayout = () => {
 
   const menuItems = [
     { icon: Home, label: "Dashboard", path: "/mentor" },
-    { icon: MessageSquare, label: "Phản hồi", path: "/mentor/feedback" },
+    { icon: MessageSquare, label: "Phản hồi học viên", path: "/mentor/feedback" },
     { icon: BookOpen, label: "Tài nguyên", path: "/mentor/resources" },
     { icon: Settings, label: "Cài đặt", path: "/mentor/settings" },
   ];
@@ -33,15 +35,13 @@ const MentorLayout = () => {
 
   return (
     <div className="dashboard-root">
-      {/* Sidebar */}
+      {/* ===== SIDEBAR ===== */}
       <aside className={`dashboard-sidebar ${sidebarOpen ? "open" : ""}`}>
         <div className="sidebar-header">
           <div className="logo-circle">M</div>
           <div>
             <h1 className="logo-title">Mentor Hub</h1>
-            <p className="logo-subtitle">
-              {user?.username || "Giảng viên tiếng Anh"}
-            </p>
+            <p className="logo-subtitle">Giảng viên</p>
           </div>
         </div>
 
@@ -56,8 +56,8 @@ const MentorLayout = () => {
                 className={`sidebar-link ${isActive ? "active" : ""}`}
                 onClick={() => setSidebarOpen(false)}
               >
-                <Icon />
-                {item.label}
+                <Icon size={20} />
+                <span>{item.label}</span>
               </Link>
             );
           })}
@@ -65,10 +65,11 @@ const MentorLayout = () => {
 
         <button className="sidebar-logout" onClick={handleLogout}>
           <LogOut size={18} />
-          Đăng xuất
+          <span>Đăng xuất</span>
         </button>
       </aside>
 
+      {/* Mobile Overlay */}
       {sidebarOpen && (
         <div
           className="sidebar-overlay"
@@ -76,40 +77,50 @@ const MentorLayout = () => {
         />
       )}
 
-      {/* Main */}
+      {/* ===== MAIN CONTENT ===== */}
       <main className="dashboard-main">
+        {/* Header */}
         <header className="dashboard-header">
-          <button
-            className="sidebar-toggle"
-            onClick={() => setSidebarOpen((v) => !v)}
-          >
-            {sidebarOpen ? <X /> : <Menu />}
-          </button>
-          <div>
-            <h1 className="dashboard-title">Dashboard</h1>
-            <p className="dashboard-subtitle">
-              Công cụ hỗ trợ mentor đánh giá và hướng dẫn học viên.
-            </p>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <button
+              className="sidebar-toggle"
+              onClick={() => setSidebarOpen((v) => !v)}
+            >
+              {sidebarOpen ? <X /> : <Menu />}
+            </button>
+
+            <div>
+              <h1 className="dashboard-title">Dashboard</h1>
+              <p className="dashboard-subtitle">
+                Công cụ hỗ trợ giảng dạy và đánh giá.
+              </p>
+            </div>
           </div>
 
+          {/* User Widget */}
           <div className="dashboard-user-card">
             <div className="user-stats">
-              <div className="user-stat-value">1</div>
-              <div className="user-stat-label">Giảng viên</div>
+              <div className="user-stat-value">Mentor</div>
+              <div className="user-stat-label">Verified</div>
             </div>
             <div className="user-info">
               <div className="user-avatar">
-                {user?.username?.[0]?.toUpperCase() || "M"}
+                {user?.username?.[0]?.toUpperCase() || <GraduationCap size={20} />}
               </div>
               <div>
-                <p className="font-medium">{user?.username || "Mentor"}</p>
-                <p className="text-sm text-emerald-300">Giảng viên</p>
+                <p className="font-medium" style={{ margin: 0, fontWeight: 600 }}>
+                  {user?.username || "Giảng viên"}
+                </p>
+                <p style={{ margin: 0, fontSize: "0.75rem", color: "#22d3ee" }}>
+                  Đang hoạt động
+                </p>
               </div>
             </div>
           </div>
         </header>
 
-        <div className="mt-6">
+        {/* Page Content Wrapper */}
+        <div className="mentor-page-container">
           <Outlet />
         </div>
       </main>

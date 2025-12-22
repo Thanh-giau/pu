@@ -1,4 +1,5 @@
 // src/pages/admin/UserManagement.jsx
+import './AdminPremium.css';
 import React, { useEffect, useState } from "react";
 import {
   getAdminUsers,

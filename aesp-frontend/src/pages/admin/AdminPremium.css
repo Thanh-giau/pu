@@ -1,4 +1,4 @@
-/* ===== UserManagement.css ===== */
+/* ===== AdminPremium.css - Unified Premium Admin Styles ===== */
 
 :root {
   --glass-bg: rgba(255, 255, 255, 0.08);
@@ -10,7 +10,7 @@
   --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-/* Page Container */
+/* ====================== PAGE CONTAINER ====================== */
 .admin-page-container {
   max-width: 1400px;
   margin: 0 auto;
@@ -39,7 +39,7 @@
   margin-bottom: 2rem;
 }
 
-/* Card */
+/* ====================== CARDS ====================== */
 .admin-card {
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
@@ -51,6 +51,10 @@
   transition: all 0.3s ease;
   animation: card-slide-in 0.5s ease backwards;
 }
+
+.admin-card:nth-child(1) { animation-delay: 0.1s; }
+.admin-card:nth-child(2) { animation-delay: 0.2s; }
+.admin-card:nth-child(3) { animation-delay: 0.3s; }
 
 @keyframes card-slide-in {
   from {
@@ -74,6 +78,9 @@
   font-weight: 800;
   color: var(--text-strong);
   margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .admin-card-subtitle {
@@ -83,8 +90,9 @@
   margin-bottom: 1.5rem;
 }
 
-/* Form */
-.admin-user-form {
+/* ====================== FORMS ====================== */
+.admin-user-form,
+.admin-form {
   margin-top: 1.5rem;
 }
 
@@ -169,7 +177,7 @@
   cursor: not-allowed;
 }
 
-/* Alert */
+/* ====================== ALERTS ====================== */
 .auth-error {
   padding: 1rem 1.25rem;
   background: rgba(239, 68, 68, 0.15);
@@ -188,7 +196,13 @@
   75% { transform: translateX(10px); }
 }
 
-/* Table Card */
+.auth-success {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.4);
+  color: #bbf7d0;
+}
+
+/* ====================== TABLES ====================== */
 .admin-table-card {
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
@@ -196,8 +210,7 @@
   border-radius: 24px;
   padding: 2rem;
   box-shadow: var(--shadow-md);
-  animation: card-slide-in 0.6s ease backwards;
-  animation-delay: 0.2s;
+  margin-bottom: 2rem;
 }
 
 .admin-table-wrapper {
@@ -253,7 +266,7 @@
   border-bottom: none;
 }
 
-/* Buttons */
+/* ====================== BUTTONS ====================== */
 .delete-btn {
   padding: 0.625rem 1.25rem;
   background: linear-gradient(135deg, #ef4444, #dc2626);
@@ -278,13 +291,216 @@
   box-shadow: none;
 }
 
-/* Responsive */
+.btn-lock {
+  background: linear-gradient(135deg, #f97316, #ea580c);
+}
+
+.btn-unlock {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+/* ====================== COURSE LIST SPECIFIC ====================== */
+.course-list-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.course-list-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+}
+
+.course-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+}
+
+.course-form input,
+.course-form select {
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  color: var(--text-strong);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.course-form input::placeholder {
+  color: var(--text-muted);
+}
+
+.course-form input:focus {
+  outline: none;
+  border-color: #a78bfa;
+  box-shadow: 0 0 0 4px rgba(167, 139, 250, 0.1);
+}
+
+.course-form button {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #7c3aed, #3b82f6);
+  color: white;
+  font-weight: 700;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
+}
+
+.course-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 40px rgba(124, 58, 237, 0.5);
+}
+
+/* ====================== REPORTS SPECIFIC ====================== */
+.reports-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.reports-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.reports-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-soft);
+  margin-bottom: 3rem;
+}
+
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.report-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.report-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #60a5fa, #a78bfa, #f472b6);
+}
+
+.report-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.report-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1rem;
+}
+
+.report-value {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--text-strong);
+  line-height: 1;
+}
+
+.reports-note {
+  padding: 1.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  border-radius: 16px;
+  color: var(--text-soft);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.reports-loading,
+.reports-error {
+  padding: 2rem;
+  text-align: center;
+  font-size: 1.125rem;
+  color: var(--text-soft);
+  background: var(--glass-bg);
+  border-radius: 16px;
+}
+
+.reports-error {
+  color: #fecaca;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+/* ====================== SETTINGS ====================== */
+.settings-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.settings-title {
+  font-size: 2.5rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.settings-subtitle {
+  font-size: 1rem;
+  color: var(--text-soft);
+  margin-bottom: 3rem;
+}
+
+/* ====================== RESPONSIVE ====================== */
 @media (max-width: 768px) {
-  .admin-page-container {
+  .admin-page-container,
+  .course-list-container,
+  .reports-container {
     padding: 1rem;
   }
 
-  .admin-page-title {
+  .admin-page-title,
+  .course-list-title,
+  .reports-title {
     font-size: 2rem;
   }
 
@@ -294,5 +510,31 @@
 
   .admin-form-row {
     grid-template-columns: 1fr;
+  }
+
+  .course-form {
+    grid-template-columns: 1fr;
+  }
+
+  .reports-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .report-value {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reports-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ====================== ANIMATIONS ====================== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
   }
 }

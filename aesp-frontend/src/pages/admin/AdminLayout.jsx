@@ -11,8 +11,11 @@ import {
   Menu,
   X,
 } from "lucide-react";
-import "../../assets/Css/dashboard.css";
-import "../../assets/Css/admin.css";
+
+// --- QUAN TRỌNG: Import đúng CSS ---
+import "./AdminLayout.css";   // File bố cục (Sidebar, Header) vừa tạo ở bước 1
+import "./AdminPremium.css";  // File style chi tiết (Glass effect, Card, Form)
+// import "../../assets/Css/dashboard.css"; // <-- XÓA HOẶC COMMENT DÒNG NÀY (Vì nó đang thiếu style)
 
 const AdminLayout = () => {
   const user = getCurrentUser();
@@ -41,7 +44,7 @@ const AdminLayout = () => {
           <div className="logo-circle">A</div>
           <div>
             <h1 className="logo-title">Admin Panel</h1>
-            <p className="logo-subtitle">admin</p>
+            <p className="logo-subtitle">admin space</p>
           </div>
         </div>
 
@@ -56,8 +59,8 @@ const AdminLayout = () => {
                 className={`sidebar-link ${isActive ? "active" : ""}`}
                 onClick={() => setSidebarOpen(false)}
               >
-                <Icon />
-                {item.label}
+                <Icon size={20} />
+                <span>{item.label}</span>
               </Link>
             );
           })}
@@ -65,10 +68,11 @@ const AdminLayout = () => {
 
         <button className="sidebar-logout" onClick={handleLogout}>
           <LogOut size={18} />
-          Đăng xuất
+          <span>Đăng xuất</span>
         </button>
       </aside>
 
+      {/* Mobile Overlay */}
       {sidebarOpen && (
         <div
           className="sidebar-overlay"
@@ -76,42 +80,44 @@ const AdminLayout = () => {
         />
       )}
 
-      {/* Main */}
+      {/* Main Content */}
       <main className="dashboard-main admin-main">
         <header className="dashboard-header">
-          <button
-            className="sidebar-toggle"
-            onClick={() => setSidebarOpen((v) => !v)}
-          >
-            {sidebarOpen ? <X /> : <Menu />}
-          </button>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <button
+              className="sidebar-toggle"
+              onClick={() => setSidebarOpen((v) => !v)}
+            >
+              {sidebarOpen ? <X /> : <Menu />}
+            </button>
 
-          <div>
-            <h1 className="dashboard-title">Tổng quan</h1>
-            <p className="dashboard-subtitle">
-              Khu quản lý hệ thống dành cho quản trị viên.
-            </p>
+            <div>
+              <h1 className="dashboard-title">Tổng quan</h1>
+              <p className="dashboard-subtitle">
+                Chào mừng trở lại, quản trị viên.
+              </p>
+            </div>
           </div>
 
           <div className="dashboard-user-card">
             <div className="user-stats">
-              <div className="user-stat-value">admin</div>
-              <div className="user-stat-label">Quản trị viên</div>
+              <div className="user-stat-value">System</div>
+              <div className="user-stat-label">Online</div>
             </div>
             <div className="user-info">
               <div className="user-avatar">
                 {user?.username?.[0]?.toUpperCase() || "A"}
               </div>
               <div>
-                <p className="font-medium">{user?.username || "admin"}</p>
-                <p className="text-sm text-emerald-300">Quản trị viên</p>
+                <p className="font-medium" style={{ margin: 0, fontWeight: 600 }}>{user?.username || "Admin"}</p>
+                <p style={{ margin: 0, fontSize: "0.8rem", color: "#6ee7b7" }}>Super Admin</p>
               </div>
             </div>
           </div>
         </header>
 
-        {/* Tất cả các trang con của admin nằm trong wrapper này */}
-        <div className="admin-page">
+        {/* Nội dung trang con sẽ render ở đây */}
+        <div className="admin-page-container">
           <Outlet />
         </div>
       </main>
