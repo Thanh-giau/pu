@@ -7,7 +7,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const PORT = process.env.PORT || 5003;
+const PORT = process.env.PORT || 5004;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 // Route cũ (nếu bạn đang dùng ở nơi khác, có thể bỏ qua hoặc giữ nguyên)

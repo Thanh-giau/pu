@@ -1,7 +1,7 @@
 // src/services/learningApi.js
 import axios from "axios";
 
-const API_BASE = "http://localhost:5050";
+const API_BASE = `http://${window.location.hostname}:5050`;
 
 /* ====== COURSES GOI HOC ====== */
 

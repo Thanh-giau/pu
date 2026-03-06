@@ -24,6 +24,25 @@ export const updateCourse = async (id, course) => {
 };
 
 export const deleteCourse = async (id) => {
-  await pool.query("DELETE FROM courses WHERE id=?", [id]);
-  return true;
+  const connection = await pool.getConnection();
+  try {
+    await connection.beginTransaction();
+
+    // 1. Xóa tiến độ học tập liên quan
+    await connection.query("DELETE FROM progress WHERE course_id = ?", [id]);
+
+    // 2. Xóa enrollment liên quan
+    await connection.query("DELETE FROM enrollments WHERE course_id = ?", [id]);
+
+    // 3. Xóa khóa học
+    await connection.query("DELETE FROM courses WHERE id = ?", [id]);
+
+    await connection.commit();
+    return true;
+  } catch (error) {
+    await connection.rollback();
+    throw error;
+  } finally {
+    connection.release();
+  }
 };

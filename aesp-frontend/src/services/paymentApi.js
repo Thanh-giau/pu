@@ -1,7 +1,7 @@
 // src/services/paymentApi.js
 import axios from "axios";
 
-const API_BASE = "http://localhost:5050";
+const API_BASE = `http://${window.location.hostname}:5050`;
 
 export const getPaymentsByUser = async (userId) => {
   const res = await axios.get(`${API_BASE}/api/payments/user/${userId}`);

@@ -1,28 +1,46 @@
 // src/pages/learner/LearnerDashboard.jsx
-import "./styles/learner-dashboard.css";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  BookOpen,
+  Mic,
+  BarChart2,
+  CreditCard,
+  Target,
+  ArrowRight,
+  Sparkles,
+  Clock,
+  TrendingUp,
+  Award,
+} from "lucide-react";
+import "./styles/learner-dashboard.css";
 
 const LearnerDashboard = () => {
   const navigate = useNavigate();
 
   const quickActions = [
     {
-      title: "Đánh giá năng lực ban đầu",
-      desc: "Làm bài test để hệ thống hiểu trình độ hiện tại của bạn.",
+      title: "Đánh giá năng lực",
+      desc: "Làm bài test để hệ thống hiểu trình độ của bạn",
       button: "Bắt đầu đánh giá",
+      icon: Target,
+      color: "blue",
       onClick: () => navigate("/learner/assessment"),
     },
     {
       title: "Danh sách khóa học",
-      desc: "Xem và đăng ký các khóa học phù hợp với mục tiêu của bạn.",
+      desc: "Xem và đăng ký các khóa học phù hợp",
       button: "Xem khóa học",
+      icon: BookOpen,
+      color: "purple",
       onClick: () => navigate("/learner/courses"),
     },
     {
       title: "Theo dõi tiến độ",
-      desc: "Xem số bài đã hoàn thành và tỉ lệ hoàn thành cho từng khóa.",
+      desc: "Xem số bài hoàn thành và tỉ lệ cho từng khóa",
       button: "Xem tiến độ",
+      icon: BarChart2,
+      color: "green",
       onClick: () => navigate("/learner/progress"),
     },
   ];
@@ -30,99 +48,114 @@ const LearnerDashboard = () => {
   const practiceCards = [
     {
       title: "Luyện nói cùng AI",
-      desc: "Thực hành nói tiếng Anh theo chủ đề với phản hồi realtime.",
+      desc: "Thực hành nói tiếng Anh theo chủ đề với phản hồi realtime từ AI thông minh",
       button: "Vào phòng luyện nói",
+      icon: Mic,
+      gradient: "linear-gradient(135deg, #10b981, #06b6d4)",
       onClick: () => navigate("/learner/speaking"),
     },
     {
       title: "Thanh toán gói học",
-      desc: "Quản lý gói học, lịch sử thanh toán và gia hạn.",
+      desc: "Quản lý gói học, lịch sử thanh toán và gia hạn dễ dàng",
       button: "Quản lý thanh toán",
+      icon: CreditCard,
+      gradient: "linear-gradient(135deg, #f59e0b, #ef4444)",
       onClick: () => navigate("/learner/payment"),
     },
   ];
 
   return (
-    <div className="learner-dashboard space-y-8">
-      {/* Hàng đầu: card lớn đánh giá */}
-      <div className="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl p-6 md:p-8 text-white flex flex-col md:flex-row md:items-center md:justify-between gap-6 shadow-lg">
-        <div>
-          <h2 className="text-2xl font-semibold mb-2">
-            Bắt đầu bằng một bài đánh giá
-          </h2>
-          <p className="text-sm md:text-base text-indigo-100 max-w-xl">
-            Chỉ với 10 đến 15 phút, hệ thống sẽ giúp bạn xác định trình độ và
-            đề xuất lộ trình học tập phù hợp nhất.
-          </p>
-          <button
-            onClick={() => navigate("/learner/assessment")}
-            className="mt-4 inline-flex items-center px-4 py-2 rounded-lg bg-white text-indigo-700 font-medium text-sm hover:bg-indigo-50 transition"
-          >
-            Bắt đầu đánh giá ngay
-          </button>
-        </div>
-
-        <div className="grid grid-cols-2 gap-3 text-sm">
-          <div className="bg-white/10 rounded-xl p-3">
-            <p className="text-xs text-indigo-100">Mục tiêu</p>
-            <p className="text-lg font-semibold">Giao tiếp cơ bản</p>
-          </div>
-          <div className="bg-white/10 rounded-xl p-3">
-            <p className="text-xs text-indigo-100">Thời lượng gợi ý</p>
-            <p className="text-lg font-semibold">30 phút/ngày</p>
-          </div>
-          <div className="bg-white/10 rounded-xl p-3">
-            <p className="text-xs text-indigo-100">Số buổi/tuần</p>
-            <p className="text-lg font-semibold">5 buổi</p>
-          </div>
-          <div className="bg-white/10 rounded-xl p-3">
-            <p className="text-xs text-indigo-100">Dự kiến hoàn thành</p>
-            <p className="text-lg font-semibold">3 tháng</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Hàng 2: các hành động nhanh */}
-      <div className="grid md:grid-cols-3 gap-6">
-        {quickActions.map((card) => (
-          <div
-            key={card.title}
-            className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between"
-          >
-            <div>
-              <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
-              <p className="text-sm text-gray-600">{card.desc}</p>
+    <div className="ld-page">
+      {/* Hero Banner */}
+      <div className="ld-hero">
+        <div className="ld-hero-glow" />
+        <div className="ld-hero-content">
+          <div className="ld-hero-left">
+            <div className="ld-hero-badge">
+              <Sparkles size={14} />
+              <span>AI-Powered Learning</span>
             </div>
+            <h2 className="ld-hero-title">
+              Bắt đầu bằng một bài đánh giá
+            </h2>
+            <p className="ld-hero-desc">
+              Chỉ với 10–15 phút, hệ thống sẽ giúp bạn xác định trình độ và đề xuất lộ trình phù hợp nhất.
+            </p>
             <button
-              onClick={card.onClick}
-              className="mt-4 inline-flex items-center justify-center px-3 py-2 text-sm font-medium rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 transition"
+              onClick={() => navigate("/learner/assessment")}
+              className="ld-hero-btn"
             >
-              {card.button}
+              <span>Bắt đầu đánh giá ngay</span>
+              <ArrowRight size={18} />
             </button>
           </div>
-        ))}
+
+          <div className="ld-hero-stats">
+            {[
+              { icon: Target, label: "Mục tiêu", value: "Giao tiếp cơ bản" },
+              { icon: Clock, label: "Thời lượng gợi ý", value: "30 phút/ngày" },
+              { icon: TrendingUp, label: "Số buổi/tuần", value: "5 buổi" },
+              { icon: Award, label: "Dự kiến hoàn thành", value: "3 tháng" },
+            ].map((stat, i) => {
+              const Icon = stat.icon;
+              return (
+                <div key={i} className="ld-hero-stat">
+                  <Icon size={16} style={{ opacity: 0.8 }} />
+                  <div>
+                    <div className="ld-stat-label">{stat.label}</div>
+                    <div className="ld-stat-value">{stat.value}</div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
-      {/* Hàng 3: luyện tập và thanh toán */}
-      <div className="grid md:grid-cols-2 gap-6">
-        {practiceCards.map((card) => (
-          <div
-            key={card.title}
-            className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col justify-between"
-          >
-            <div>
-              <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
-              <p className="text-sm text-gray-600">{card.desc}</p>
+      {/* Quick Actions */}
+      <div className="ld-grid-3">
+        {quickActions.map((card) => {
+          const Icon = card.icon;
+          return (
+            <div key={card.title} className={`ld-card ld-card-${card.color}`}>
+              <div className="ld-card-glow" />
+              <div className="ld-card-icon">
+                <Icon size={24} />
+              </div>
+              <h3 className="ld-card-title">{card.title}</h3>
+              <p className="ld-card-desc">{card.desc}</p>
+              <button onClick={card.onClick} className="ld-card-btn">
+                <span>{card.button}</span>
+                <ArrowRight size={16} />
+              </button>
             </div>
-            <button
-              onClick={card.onClick}
-              className="mt-4 inline-flex items-center justify-center px-3 py-2 text-sm font-medium rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 transition"
-            >
-              {card.button}
-            </button>
-          </div>
-        ))}
+          );
+        })}
       </div>
+
+      {/* Practice Cards */}
+      <div className="ld-grid-2">
+        {practiceCards.map((card) => {
+          const Icon = card.icon;
+          return (
+            <div key={card.title} className="ld-practice-card">
+              <div className="ld-practice-gradient" style={{ background: card.gradient }} />
+              <div className="ld-practice-content">
+                <div className="ld-practice-icon" style={{ background: card.gradient }}>
+                  <Icon size={28} color="#fff" />
+                </div>
+                <h3 className="ld-practice-title">{card.title}</h3>
+                <p className="ld-practice-desc">{card.desc}</p>
+                <button onClick={card.onClick} className="ld-practice-btn">
+                  <span>{card.button}</span>
+                  <ArrowRight size={16} />
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
     </div>
   );
 };

@@ -44,7 +44,8 @@ router.delete("/:id", async (req, res) => {
     await deleteCourse(req.params.id);
     res.json({ message: "Đã xóa khóa học" });
   } catch (err) {
-    res.status(500).json({ message: "Lỗi khi xóa khóa học", error: err });
+    console.error("Lỗi xóa khóa học trong route:", err);
+    res.status(500).json({ message: "Lỗi khi xóa khóa học", error: err.message });
   }
 });
 

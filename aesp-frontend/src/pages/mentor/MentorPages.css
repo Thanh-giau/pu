@@ -1,0 +1,364 @@
+/* ===== MentorPages.css — Premium Glass UI for Mentor Sub-pages ===== */
+
+/* Page root */
+.mentor-page {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    animation: mt-fadeIn 0.5s ease;
+}
+
+@keyframes mt-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Titles */
+.mentor-title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0;
+    background: linear-gradient(135deg, #fff 0%, #e0f2fe 40%, #22d3ee 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.mentor-subtitle {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, .6);
+    margin: 6px 0 0;
+    line-height: 1.6;
+}
+
+/* Sections */
+.mentor-section {
+    background: rgba(255, 255, 255, .05);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 22px;
+    padding: 1.75rem;
+    transition: all 0.3s ease;
+}
+
+.mentor-section:hover {
+    border-color: rgba(255, 255, 255, .18);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, .25);
+}
+
+.mentor-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.mentor-section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.mentor-section-note {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, .5);
+    line-height: 1.5;
+}
+
+/* Stat Grid (2-col) */
+.mentor-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+}
+
+/* Stat Card */
+.mentor-stat-card {
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 18px;
+    padding: 1.25rem;
+    transition: all 0.3s ease;
+}
+
+.mentor-stat-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, .16);
+    box-shadow: 0 14px 35px rgba(0, 0, 0, .2);
+}
+
+.mentor-stat-label {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, .55);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.mentor-stat-value {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.1;
+}
+
+/* Action Grid */
+.mentor-action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+}
+
+.mentor-action-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, .04);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 18px;
+    cursor: pointer;
+    text-align: left;
+    color: #fff;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(.175, .885, .32, 1.275);
+}
+
+.mentor-action-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .06), transparent);
+    transition: 0.6s;
+    transform: skewX(-20deg);
+}
+
+.mentor-action-card:hover::after {
+    left: 150%;
+}
+
+.mentor-action-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(14, 165, 233, .35);
+    box-shadow: 0 16px 40px rgba(14, 165, 233, .15);
+}
+
+.mentor-action-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #0ea5e9, #10b981);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 18px rgba(14, 165, 233, .25);
+    transition: transform 0.4s ease;
+}
+
+.mentor-action-card:hover .mentor-action-icon {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.mentor-action-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 4px;
+}
+
+.mentor-action-desc {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, .55);
+    line-height: 1.5;
+}
+
+/* Badge */
+.mentor-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: rgba(14, 165, 233, .15);
+    border: 1px solid rgba(14, 165, 233, .3);
+    border-radius: 50px;
+    color: #67e8f9;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Tag Strong */
+.mentor-tag-strong {
+    font-weight: 600;
+    color: #e0f2fe;
+}
+
+/* Field Groups */
+.mentor-field-group {
+    margin-bottom: 1rem;
+}
+
+.mentor-label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, .65);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+}
+
+.mentor-help {
+    font-size: 0.78rem;
+    color: rgba(255, 255, 255, .42);
+    margin-top: 4px;
+    line-height: 1.4;
+}
+
+/* Lists */
+.mentor-list {
+    margin: 0;
+    padding: 0 0 0 18px;
+    color: rgba(255, 255, 255, .75);
+    font-size: 0.88rem;
+    line-height: 1.8;
+}
+
+.mentor-list li::marker {
+    color: #22d3ee;
+}
+
+/* Inputs — extend MentorLayout.css */
+.mentor-textarea {
+    width: 100%;
+    min-height: 80px;
+    resize: vertical;
+    padding: 0.875rem 1rem;
+    background: rgba(0, 0, 0, .2);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.mentor-textarea:focus {
+    outline: none;
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, .15);
+    background: rgba(0, 0, 0, .3);
+}
+
+.mentor-select {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background: rgba(0, 0, 0, .2);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 12px;
+    color: #fff;
+    font-size: 0.95rem;
+    transition: all 0.2s;
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.mentor-select:focus {
+    outline: none;
+    border-color: #0ea5e9;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, .15);
+}
+
+/* Button */
+.mentor-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #0ea5e9, #10b981);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.92rem;
+    cursor: pointer;
+    box-shadow: 0 6px 22px rgba(14, 165, 233, .3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.mentor-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.mentor-button:hover::before {
+    transform: translateX(100%);
+}
+
+.mentor-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(14, 165, 233, .4);
+}
+
+.mentor-button-secondary {
+    background: rgba(239, 68, 68, .15);
+    border: 1px solid rgba(239, 68, 68, .3);
+    color: #fca5a5;
+    box-shadow: none;
+}
+
+.mentor-button-secondary:hover {
+    background: rgba(239, 68, 68, .25);
+    box-shadow: 0 4px 14px rgba(239, 68, 68, .2);
+}
+
+/* Table Wrapper */
+.mentor-table-wrapper {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, .08);
+    background: rgba(255, 255, 255, .02);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .mentor-stat-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mentor-action-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mentor-title {
+        font-size: 1.5rem;
+    }
+}

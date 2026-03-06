@@ -1,40 +1,249 @@
-.learner-progress-tracking{
-  background: rgba(255,255,255,.04) !important;
-  border: 1px solid rgba(255,255,255,.10);
-  border-radius: 22px !important;
-  box-shadow: 0 18px 40px rgba(0,0,0,.25) !important;
-  backdrop-filter: blur(10px);
-  color: rgba(226,232,240,.92);
+/* ===== learner-progress-tracking.css — Premium Glass Progress ===== */
+
+.pt-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: rgba(226, 232, 240, .92);
 }
 
-/* Title */
-.learner-progress-tracking h2{
-  color:#e0e7ff !important;
-  text-shadow: 0 12px 30px rgba(99,102,241,.14);
+.pt-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0;
 }
 
-/* Form block */
-.learner-progress-tracking .bg-white{
-  background: rgba(2,6,23,.28) !important;
-  border:1px solid rgba(255,255,255,.10);
-  border-radius: 18px !important;
+.pt-subtitle {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, .55);
+  margin: 4px 0 0;
 }
 
-.learner-progress-tracking input{
-  background: rgba(2,6,23,.50) !important;
-  border:1px solid rgba(255,255,255,.10) !important;
-  color: rgba(226,232,240,.92) !important;
-  border-radius: 14px !important;
+.pt-glass-card {
+  background: rgba(255, 255, 255, .05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, .1);
+  border-radius: 20px;
+  padding: 1.5rem;
 }
 
-.learner-progress-tracking table{
-  border-collapse: separate;
-  border-spacing:0;
+.pt-card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 16px;
 }
-.learner-progress-tracking thead{
-  background: rgba(2,6,23,.38) !important;
-  color: rgba(226,232,240,.75) !important;
+
+.pt-form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
 }
-.learner-progress-tracking tbody tr:hover{
-  background: rgba(99,102,241,.10);
+
+.pt-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pt-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, .6);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pt-field input {
+  background: rgba(2, 6, 23, .5);
+  border: 1px solid rgba(255, 255, 255, .12);
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: #fff;
+  width: 140px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.pt-field input:focus {
+  border-color: rgba(99, 102, 241, .5);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, .15);
+}
+
+.pt-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(102, 126, 234, .3);
+  transition: all 0.3s ease;
+}
+
+.pt-add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, .4);
+}
+
+.pt-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: rgba(239, 68, 68, .1);
+  border: 1px solid rgba(239, 68, 68, .25);
+  border-radius: 14px;
+  color: #fca5a5;
+  font-size: 0.9rem;
+}
+
+.pt-empty {
+  text-align: center;
+  padding: 40px;
+  color: rgba(255, 255, 255, .45);
+  font-size: 0.95rem;
+}
+
+/* Table */
+.pt-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pt-table thead th {
+  padding: 14px 16px;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, .55);
+  background: rgba(2, 6, 23, .4);
+  border-bottom: 1px solid rgba(255, 255, 255, .1);
+}
+
+.pt-table tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, .06);
+  color: rgba(226, 232, 240, .88);
+}
+
+.pt-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.pt-table tbody tr:hover {
+  background: rgba(99, 102, 241, .08);
+}
+
+/* Progress Bar */
+.pt-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pt-progress-bar {
+  flex: 1;
+  height: 8px;
+  max-width: 140px;
+  background: rgba(255, 255, 255, .08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.pt-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #667eea, #a855f7);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.pt-progress-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #a78bfa;
+  min-width: 48px;
+}
+
+/* Action Buttons */
+.pt-action-group {
+  display: flex;
+  gap: 6px;
+}
+
+.pt-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #fff;
+}
+
+.pt-btn:hover {
+  transform: translateY(-1px);
+}
+
+.pt-btn-green {
+  background: rgba(16, 185, 129, .2);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, .3);
+}
+
+.pt-btn-green:hover {
+  background: rgba(16, 185, 129, .3);
+}
+
+.pt-btn-amber {
+  background: rgba(245, 158, 11, .2);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, .3);
+}
+
+.pt-btn-amber:hover {
+  background: rgba(245, 158, 11, .3);
+}
+
+.pt-btn-red {
+  background: rgba(239, 68, 68, .2);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, .3);
+}
+
+.pt-btn-red:hover {
+  background: rgba(239, 68, 68, .3);
+}
+
+@media (max-width: 768px) {
+  .pt-form-row {
+    flex-direction: column;
+  }
+
+  .pt-field input {
+    width: 100%;
+  }
+
+  .pt-table {
+    font-size: 0.85rem;
+  }
+
+  .pt-action-group {
+    flex-wrap: wrap;
+  }
 }

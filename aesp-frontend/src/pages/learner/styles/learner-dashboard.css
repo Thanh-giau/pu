@@ -1,185 +1,357 @@
-.learner-dashboard{
-  position:relative;
+/* ===== learner-dashboard.css — Premium Glass Dashboard ===== */
+
+.ld-page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
-/* HERO: parallax giả lập bằng background + animation gradient */
-.learner-dashboard > div:first-child{
-  position:relative;
-  overflow:hidden;
-  border:1px solid rgba(255,255,255,.10);
-  transform-style: preserve-3d;
+/* Hero */
+.ld-hero {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2.5rem;
+  overflow: hidden;
 }
 
-.learner-dashboard > div:first-child::before{
-  content:"Nền tảng AI #1";
-  position:absolute;
-  top:18px;
-  left:18px;
-  padding:8px 12px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:800;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  background:rgba(255,255,255,.10);
-  border:1px solid rgba(255,255,255,.18);
-  box-shadow: 0 14px 30px rgba(99,102,241,.18);
-  animation: lx-float 2.6s ease-in-out infinite;
+.ld-hero-glow {
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(102, 126, 234, 0.2), transparent 70%);
+  filter: blur(80px);
+  pointer-events: none;
 }
 
-.learner-dashboard > div:first-child::after{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  background:
-    radial-gradient(420px 220px at 20% 20%, rgba(255,255,255,.16), transparent 60%),
-    radial-gradient(520px 260px at 70% 70%, rgba(99,102,241,.20), transparent 60%),
-    radial-gradient(520px 260px at 40% 80%, rgba(34,197,94,.14), transparent 60%);
-  opacity:.9;
-  filter: blur(16px);
-  animation: lx-bg-shift 6s cubic-bezier(.2,.9,.2,1) infinite;
-  pointer-events:none;
+.ld-hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
 }
 
-@keyframes lx-float{
-  0%{ transform: translateY(0); }
-  50%{ transform: translateY(-6px); }
-  100%{ transform: translateY(0); }
-}
-@keyframes lx-bg-shift{
-  0%{ transform: translate3d(0,0,0) scale(1); }
-  50%{ transform: translate3d(10px,-10px,0) scale(1.03); }
-  100%{ transform: translate3d(0,0,0) scale(1); }
+.ld-hero-left {
+  flex: 1;
 }
 
-/* Gradient text auto run (title inside hero) */
-.learner-dashboard > div:first-child h2{
-  background: linear-gradient(90deg, #ffffff, rgba(255,255,255,.65), #ffffff);
-  background-size: 220% 100%;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  animation: lx-text-gradient 3.8s linear infinite;
-  position:relative;
-  z-index:1;
-}
-@keyframes lx-text-gradient{
-  0%{ background-position: 0% 0; }
-  100%{ background-position: 200% 0; }
+.ld-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(102, 126, 234, 0.15);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  border-radius: 50px;
+  color: #a78bfa;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 20px;
 }
 
-/* Scroll indicator nhỏ góc dưới hero */
-.learner-dashboard > div:first-child{
-  padding-bottom:34px;
-}
-.learner-dashboard > div:first-child .lx-scroll-indicator{
-  display:none;
-}
-.learner-dashboard > div:first-child::marker{ content:""; }
-
-.learner-dashboard > div:first-child::before,
-.learner-dashboard > div:first-child h2,
-.learner-dashboard > div:first-child p,
-.learner-dashboard > div:first-child button,
-.learner-dashboard > div:first-child .grid{
-  position:relative;
-  z-index:1;
+.ld-hero-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 12px;
+  line-height: 1.2;
 }
 
-/* Stats cards (4 ô trong hero) */
-.learner-dashboard > div:first-child .grid > div{
-  border:1px solid rgba(255,255,255,.12);
-  box-shadow: 0 18px 40px rgba(0,0,0,.22);
-  transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s cubic-bezier(.2,.9,.2,1);
-}
-.learner-dashboard > div:first-child .grid > div:hover{
-  transform: translateY(-6px) scale(1.05);
-  box-shadow: 0 22px 50px rgba(99,102,241,.18);
-}
-.learner-dashboard > div:first-child .grid > div::after{
-  content:"";
-  position:absolute;
-  left:14px;
-  right:14px;
-  bottom:10px;
-  height:2px;
-  border-radius:999px;
-  background: linear-gradient(90deg, rgba(99,102,241,.0), rgba(255,255,255,.55), rgba(34,197,94,.0));
-  opacity:0;
-  transform: translateY(6px);
-  transition: opacity .28s cubic-bezier(.2,.9,.2,1), transform .28s cubic-bezier(.2,.9,.2,1);
-}
-.learner-dashboard > div:first-child .grid > div:hover::after{
-  opacity:1;
-  transform: translateY(0);
+.ld-hero-desc {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0 0 24px;
+  line-height: 1.7;
+  max-width: 500px;
 }
 
-/* Quick action cards + Practice cards: 3D hover + arrow */
-.learner-dashboard .grid > div.bg-white{
-  background: rgba(255,255,255,.06) !important;
-  border:1px solid rgba(255,255,255,.10) !important;
-  box-shadow: 0 18px 40px rgba(0,0,0,.22);
-  backdrop-filter: blur(10px);
-  transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .28s cubic-bezier(.2,.9,.2,1);
-  transform-style: preserve-3d;
-  position:relative;
-  overflow:hidden;
+.ld-hero-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(102, 126, 234, 0.35);
+  transition: all 0.3s ease;
 }
 
-.learner-dashboard .grid > div.bg-white::before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  background:
-    radial-gradient(240px 140px at 20% 20%, rgba(99,102,241,.22), transparent 60%),
-    radial-gradient(240px 140px at 80% 80%, rgba(34,197,94,.16), transparent 60%);
-  opacity:.6;
-  filter: blur(18px);
-  pointer-events:none;
+.ld-hero-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(102, 126, 234, 0.5);
 }
 
-.learner-dashboard .grid > div.bg-white:hover{
-  transform: translateY(-8px) rotateX(7deg);
-  box-shadow: 0 26px 60px rgba(99,102,241,.14);
+.ld-hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex-shrink: 0;
 }
 
-/* Arrow xuất hiện */
-.learner-dashboard .grid > div.bg-white button{
-  position:relative;
-}
-.learner-dashboard .grid > div.bg-white button::after{
-  content:"→";
-  margin-left:10px;
-  opacity:0;
-  transform: translateX(-6px);
-  display:inline-block;
-  transition: opacity .22s var(--lx-ease), transform .22s var(--lx-ease);
-}
-.learner-dashboard .grid > div.bg-white:hover button::after{
-  opacity:1;
-  transform: translateX(0);
+.ld-hero-stat {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  color: #fff;
+  min-width: 170px;
 }
 
-/* Badge "🔥 Phổ biến" cho card giữa của quickActions (card thứ 2 trong grid 3 cột) */
-@media (min-width: 768px){
-  .learner-dashboard > div:nth-of-type(2) .grid > div:nth-child(2)::after{
-    content:"🔥 Phổ biến";
-    position:absolute;
-    top:14px;
-    right:14px;
-    padding:6px 10px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:800;
-    background: rgba(251,191,36,.14);
-    border:1px solid rgba(251,191,36,.35);
-    color:#fde68a;
+.ld-stat-label {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+
+.ld-stat-value {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Quick Actions Grid */
+.ld-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.ld-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ld-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.ld-card-glow {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.ld-card:hover .ld-card-glow {
+  opacity: 0.5;
+}
+
+.ld-card-blue .ld-card-glow {
+  background: #667eea;
+}
+
+.ld-card-blue .ld-card-icon {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.3);
+}
+
+.ld-card-purple .ld-card-glow {
+  background: #764ba2;
+}
+
+.ld-card-purple .ld-card-icon {
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
+}
+
+.ld-card-green .ld-card-glow {
+  background: #10b981;
+}
+
+.ld-card-green .ld-card-icon {
+  background: linear-gradient(135deg, #10b981, #059669);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+}
+
+.ld-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin-bottom: 20px;
+  transition: transform 0.4s ease;
+}
+
+.ld-card:hover .ld-card-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.ld-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 10px;
+}
+
+.ld-card-desc {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 24px;
+  line-height: 1.6;
+}
+
+.ld-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ld-card-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+/* Practice Cards */
+.ld-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.ld-practice-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.ld-practice-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+.ld-practice-gradient {
+  height: 4px;
+  opacity: 0.8;
+}
+
+.ld-practice-content {
+  padding: 2rem;
+}
+
+.ld-practice-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transition: transform 0.4s ease;
+}
+
+.ld-practice-card:hover .ld-practice-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+.ld-practice-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 10px;
+}
+
+.ld-practice-desc {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 24px;
+  line-height: 1.6;
+}
+
+.ld-practice-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 22px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.ld-practice-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+@media (max-width: 1024px) {
+  .ld-hero-content {
+    flex-direction: column;
+  }
+
+  .ld-hero-stats {
+    width: 100%;
+  }
+
+  .ld-grid-3 {
+    grid-template-columns: 1fr;
   }
 }
 
-/* Responsive stats: mobile 2 columns */
-@media (max-width: 640px){
-  .learner-dashboard > div:first-child .grid{
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+@media (max-width: 768px) {
+  .ld-hero {
+    padding: 1.5rem;
+  }
+
+  .ld-hero-title {
+    font-size: 1.5rem;
+  }
+
+  .ld-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .ld-hero-stats {
+    grid-template-columns: 1fr;
   }
 }

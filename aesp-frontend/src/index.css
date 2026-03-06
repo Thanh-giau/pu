@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 /* ============================================
    ROOT VARIABLES - MODERN DESIGN SYSTEM
 ============================================ */
@@ -7,12 +9,12 @@
   --primary-blue: #4f46e5;
   --primary-purple: #7c3aed;
   --primary-indigo: #6366f1;
-  
+
   /* Success & Warning */
   --success-green: #10b981;
   --warning-orange: #f59e0b;
   --danger-red: #ef4444;
-  
+
   /* Neutral Palette */
   --bg-light: #fafbff;
   --bg-card: #ffffff;
@@ -21,18 +23,18 @@
   --text-secondary: #64748b;
   --text-muted: #94a3b8;
   --border-light: #e2e8f0;
-  
+
   /* Shadows */
   --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  
+
   /* Border Radius */
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
-  
+
   /* Transitions */
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -63,7 +65,7 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   background: var(--bg-light);
   color: var(--text-primary);
   line-height: 1.6;
@@ -78,18 +80,31 @@ body {
 }
 
 /* Typography */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   line-height: 1.2;
   margin: 0 0 1rem 0;
 }
 
-h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.875rem, 4vw, 2.5rem); }
-h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h1 {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+}
 
-p { 
-  margin: 0 0 1rem 0; 
+h2 {
+  font-size: clamp(1.875rem, 4vw, 2.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+p {
+  margin: 0 0 1rem 0;
   color: var(--text-secondary);
 }
 
@@ -440,8 +455,15 @@ p {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(180deg); }
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
 }
 
 .auth-card {
@@ -585,22 +607,22 @@ p {
   .hero {
     padding: 3rem 1.5rem;
   }
-  
+
   .btn-group {
     flex-direction: column;
     align-items: center;
   }
-  
+
   .btn {
     width: 100%;
     max-width: 280px;
   }
-  
+
   .stats-grid,
   .features-grid {
     grid-template-columns: 1fr;
   }
-  
+
   .main-content {
     padding: 1.5rem 1rem;
   }
@@ -610,7 +632,7 @@ p {
   .navbar-container {
     padding: 0 1rem;
   }
-  
+
   .hero {
     padding: 2rem 1rem;
   }
@@ -622,6 +644,7 @@ p {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -637,12 +660,14 @@ p {
   display: inline-block;
   width: 20px;
   height: 20px;
-  border: 3px solid rgba(255,255,255,.3);
+  border: 3px solid rgba(255, 255, 255, .3);
   border-radius: 50%;
   border-top-color: #fff;
   animation: spin 1s ease-in-out infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // 👇 CỔNG 5050 LÀ CỔNG GATEWAY MỞ RA MÁY TÍNH CỦA BẠN
-const API_BASE_URL = 'http://localhost:5050';
+const API_BASE_URL = `http://${window.location.hostname}:5050`;
 
 // Tạo một instance axios riêng để tự động thêm token vào mọi request
 const axiosClient = axios.create({

@@ -1,177 +1,224 @@
+// src/pages/mentor/MentorDashboard.jsx
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ClipboardList, MessageCircle, BookOpen, Sparkles } from "lucide-react";
+import {
+  MessageSquare,
+  BookOpen,
+  Settings,
+  Users,
+  TrendingUp,
+  Clock,
+  Star,
+  ChevronRight,
+} from "lucide-react";
+import { getCurrentUser } from "../../services/userApi";
 
 const MentorDashboard = () => {
+  const navigate = useNavigate();
+  const user = getCurrentUser();
   const [stats, setStats] = useState({
     feedbackCount: 0,
     learnerCount: 0,
     resourceCount: 0,
   });
-  const navigate = useNavigate();
 
   useEffect(() => {
     try {
-      const feedbackRaw = localStorage.getItem("mentor_feedback_entries");
-      const resourcesRaw = localStorage.getItem("mentor_resources");
-
-      const feedback = feedbackRaw ? JSON.parse(feedbackRaw) : [];
-      const resources = resourcesRaw ? JSON.parse(resourcesRaw) : [];
-
-      const learnerNames = new Set(
-        feedback
-          .map((f) => f.learnerName && f.learnerName.trim().toLowerCase())
-          .filter(Boolean)
-      );
-
+      const fb = JSON.parse(localStorage.getItem("mentor_feedback_entries") || "[]");
+      const res = JSON.parse(localStorage.getItem("mentor_resources") || "[]");
+      const learners = new Set(fb.map((i) => i.learnerName?.toLowerCase()).filter(Boolean));
       setStats({
-        feedbackCount: feedback.length,
-        learnerCount: learnerNames.size,
-        resourceCount: resources.length,
+        feedbackCount: fb.length,
+        learnerCount: learners.size,
+        resourceCount: res.length,
       });
-    } catch (err) {
-      console.error("Lỗi đọc thống kê mentor:", err);
-    }
+    } catch { }
   }, []);
 
-  const quickActions = [
-    {
-      icon: ClipboardList,
-      title: "Đánh giá và xếp trình độ",
-      desc: "Ghi lại kết quả bài đánh giá và trình độ gợi ý cho từng học viên.",
-      onClick: () => navigate("/mentor/feedback"),
-    },
-    {
-      icon: MessageCircle,
-      title: "Phản hồi sau buổi thực hành",
-      desc: "Lưu nhận xét chi tiết về phát âm, ngữ pháp, từ vựng và độ tự nhiên.",
-      onClick: () => navigate("/mentor/feedback"),
-    },
-    {
-      icon: BookOpen,
-      title: "Tài liệu bổ sung",
-      desc: "Quản lý tài liệu, bài tập và link video để gửi cho học viên.",
-      onClick: () => navigate("/mentor/resources"),
-    },
+  const statCards = [
+    { label: "Phản hồi", value: stats.feedbackCount, icon: MessageSquare, gradient: "linear-gradient(135deg, #0ea5e9, #06b6d4)" },
+    { label: "Học viên", value: stats.learnerCount, icon: Users, gradient: "linear-gradient(135deg, #10b981, #34d399)" },
+    { label: "Tài nguyên", value: stats.resourceCount, icon: BookOpen, gradient: "linear-gradient(135deg, #8b5cf6, #a78bfa)" },
   ];
 
-  const supportCards = [
-    {
-      title: "Chủ đề hội thoại thực tế",
-      desc: "Tổng hợp sẵn nhiều chủ đề và tình huống để dùng ngay trong lớp.",
-      badge: "Topics",
-    },
-    {
-      title: "Phương pháp học từ vựng",
-      desc: "Collocation, idioms và cách ôn tập để nhớ lâu hơn.",
-      badge: "Vocabulary",
-    },
-    {
-      title: "Kinh nghiệm giao tiếp với người bản xứ",
-      desc: "Chia sẻ trong mục Cài đặt để làm tài liệu chung.",
-      badge: "Sharing",
-    },
+  const actions = [
+    { title: "Phản hồi học viên", desc: "Đánh giá buổi thực hành và chỉ ra lỗi", icon: MessageSquare, path: "/mentor/feedback" },
+    { title: "Quản lý tài nguyên", desc: "Thêm video, bài tập, link tham khảo", icon: BookOpen, path: "/mentor/resources" },
+    { title: "Cài đặt", desc: "Tùy chỉnh trình độ mặc định, ghi chú", icon: Settings, path: "/mentor/settings" },
+  ];
+
+  const tips = [
+    { icon: TrendingUp, text: "Ghi phản hồi ngay sau mỗi buổi để không quên chi tiết." },
+    { icon: Clock, text: "Chia nhỏ mục tiêu cho học viên theo tuần, không theo tháng." },
+    { icon: Star, text: "Dùng ví dụ cụ thể khi chỉ ra lỗi phát âm hoặc ngữ pháp." },
   ];
 
   return (
     <div className="mentor-page">
-      <div>
-        <h2 className="mentor-title">Mentor Dashboard</h2>
-        <p className="mentor-subtitle">
-          Tổng quan công việc cố vấn và các công cụ hỗ trợ học viên.
-        </p>
-      </div>
-
-      {/* thong ke */}
-      <div className="mentor-section">
-        <div className="mentor-section-header">
-          <span className="mentor-section-title">Thống kê nhanh</span>
-          <span className="mentor-badge">Chỉ mình thấy</span>
+      {/* Hero */}
+      <div className="md-hero">
+        <div className="md-hero-glow" />
+        <div style={{ position: "relative", zIndex: 1 }}>
+          <h1 className="md-hero-title">
+            Xin chào, {user?.user?.username || user?.username || "Mentor"} 👋
+          </h1>
+          <p className="md-hero-desc">
+            Hôm nay hãy giúp học viên tiến bộ hơn. Dưới đây là tổng quan hoạt động của bạn.
+          </p>
         </div>
 
-        <div className="mentor-stat-grid">
-          <div className="mentor-stat-card">
-            <div className="mentor-stat-label">Học viên đã có phản hồi</div>
-            <div className="mentor-stat-value">{stats.learnerCount}</div>
-          </div>
-          <div className="mentor-stat-card">
-            <div className="mentor-stat-label">Số buổi phản hồi</div>
-            <div className="mentor-stat-value">{stats.feedbackCount}</div>
-          </div>
-          <div className="mentor-stat-card">
-            <div className="mentor-stat-label">Tài nguyên đang có</div>
-            <div className="mentor-stat-value">{stats.resourceCount}</div>
-          </div>
-        </div>
-      </div>
-
-      {/* hanh dong nhanh */}
-      <div className="mentor-section">
-        <div className="mentor-section-header">
-          <span className="mentor-section-title">Hành động chính</span>
-          <span className="mentor-section-note">
-            Nhảy nhanh đến các trang bạn sử dụng nhiều nhất.
-          </span>
-        </div>
-        <div className="mentor-action-grid">
-          {quickActions.map((item) => {
-            const Icon = item.icon;
-            return (
-              <button
-                key={item.title}
-                type="button"
-                onClick={item.onClick}
-                className="mentor-action-card"
-              >
-                <div>
-                  <div className="mentor-action-icon">
-                    <Icon size={18} color="#e5e7ff" />
-                  </div>
-                  <div className="mentor-action-title">{item.title}</div>
-                </div>
-                <div className="mentor-action-desc">{item.desc}</div>
-              </button>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* ho tro them */}
-      <div className="mentor-section">
-        <div className="mentor-section-header">
-          <span className="mentor-section-title">
-            Hỗ trợ kỹ năng giao tiếp
-          </span>
-          <Sparkles size={18} color="#facc15" />
-        </div>
-        <div className="mentor-stat-grid">
-          {supportCards.map((card) => (
-            <div key={card.title} className="mentor-stat-card">
-              <div className="mentor-badge" style={{ marginBottom: 6 }}>
-                {card.badge}
+        {/* Stats */}
+        <div className="md-stats-row">
+          {statCards.map((s) => (
+            <div key={s.label} className="md-stat-item">
+              <div className="md-stat-icon" style={{ background: s.gradient }}>
+                <s.icon size={20} />
               </div>
-              <div
-                style={{
-                  fontSize: 15,
-                  fontWeight: 600,
-                  marginBottom: 4,
-                  color: "#f9fafb",
-                }}
-              >
-                {card.title}
-              </div>
-              <div
-                style={{
-                  fontSize: 13,
-                  color: "#d1d5db",
-                }}
-              >
-                {card.desc}
+              <div>
+                <div className="md-stat-number">{s.value}</div>
+                <div className="md-stat-label">{s.label}</div>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      {/* Quick Actions */}
+      <div>
+        <h2 className="md-section-title">Thao tác nhanh</h2>
+        <div className="mentor-action-grid">
+          {actions.map((a) => (
+            <button
+              key={a.title}
+              className="mentor-action-card"
+              onClick={() => navigate(a.path)}
+            >
+              <div className="mentor-action-icon">
+                <a.icon size={20} color="#fff" />
+              </div>
+              <div className="mentor-action-title">{a.title}</div>
+              <div className="mentor-action-desc">{a.desc}</div>
+              <ChevronRight size={16} style={{ color: "rgba(255,255,255,.35)", marginTop: 4 }} />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Tips */}
+      <div className="mentor-section">
+        <div className="mentor-section-header">
+          <span className="mentor-section-title">
+            <Star size={18} style={{ color: "#fbbf24" }} /> Mẹo cho Mentor
+          </span>
+        </div>
+        <div className="md-tips-list">
+          {tips.map((t, i) => (
+            <div key={i} className="md-tip-item">
+              <div className="md-tip-icon">
+                <t.icon size={16} />
+              </div>
+              <span>{t.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <style>{`
+        .md-hero {
+          position: relative;
+          background: rgba(255,255,255,.05);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255,255,255,.1);
+          border-radius: 24px;
+          padding: 2.5rem;
+          overflow: hidden;
+        }
+        .md-hero-glow {
+          position: absolute;
+          top: -80px; right: -80px;
+          width: 300px; height: 300px;
+          background: radial-gradient(circle, rgba(14,165,233,.25), transparent 65%);
+          filter: blur(50px);
+          pointer-events: none;
+        }
+        .md-hero-title {
+          font-size: 2rem;
+          font-weight: 900;
+          color: #fff;
+          margin: 0 0 8px;
+          background: linear-gradient(135deg, #fff, #e0f2fe, #22d3ee);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .md-hero-desc {
+          font-size: 0.95rem;
+          color: rgba(255,255,255,.6);
+          margin: 0 0 24px;
+        }
+
+        .md-stats-row {
+          display: flex; flex-wrap: wrap; gap: 16px;
+          position: relative; z-index: 1;
+        }
+        .md-stat-item {
+          display: flex; align-items: center; gap: 12px;
+          padding: 14px 20px;
+          background: rgba(0,0,0,.2);
+          border: 1px solid rgba(255,255,255,.08);
+          border-radius: 16px;
+          min-width: 160px;
+          transition: all 0.3s ease;
+        }
+        .md-stat-item:hover {
+          transform: translateY(-3px);
+          border-color: rgba(255,255,255,.15);
+          box-shadow: 0 8px 24px rgba(0,0,0,.2);
+        }
+        .md-stat-icon {
+          width: 42px; height: 42px;
+          border-radius: 12px;
+          display: flex; align-items: center; justify-content: center;
+          color: #fff;
+          box-shadow: 0 4px 14px rgba(0,0,0,.2);
+        }
+        .md-stat-number { font-size: 1.5rem; font-weight: 800; color: #fff; }
+        .md-stat-label { font-size: 0.78rem; color: rgba(255,255,255,.55); }
+
+        .md-section-title {
+          font-size: 1.25rem;
+          font-weight: 700;
+          color: #fff;
+          margin: 0 0 16px;
+        }
+
+        .md-tips-list { display: flex; flex-direction: column; gap: 10px; }
+        .md-tip-item {
+          display: flex; align-items: flex-start; gap: 12px;
+          padding: 12px 16px;
+          background: rgba(255,255,255,.03);
+          border-radius: 14px;
+          font-size: 0.9rem;
+          color: rgba(255,255,255,.75);
+          transition: background 0.2s;
+        }
+        .md-tip-item:hover { background: rgba(255,255,255,.06); }
+        .md-tip-icon {
+          flex-shrink: 0;
+          width: 32px; height: 32px;
+          border-radius: 10px;
+          background: rgba(14,165,233,.12);
+          display: flex; align-items: center; justify-content: center;
+          color: #22d3ee;
+        }
+
+        @media (max-width: 768px) {
+          .md-hero { padding: 1.5rem; }
+          .md-hero-title { font-size: 1.5rem; }
+          .md-stats-row { flex-direction: column; }
+          .md-stat-item { min-width: auto; }
+        }
+      `}</style>
     </div>
   );
 };

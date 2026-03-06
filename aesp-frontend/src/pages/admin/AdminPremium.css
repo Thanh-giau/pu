@@ -23,6 +23,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -52,15 +53,24 @@
   animation: card-slide-in 0.5s ease backwards;
 }
 
-.admin-card:nth-child(1) { animation-delay: 0.1s; }
-.admin-card:nth-child(2) { animation-delay: 0.2s; }
-.admin-card:nth-child(3) { animation-delay: 0.3s; }
+.admin-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.admin-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.admin-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
 
 @keyframes card-slide-in {
   from {
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -158,7 +168,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   transform: translateX(-100%);
   transition: transform 0.6s ease;
 }
@@ -191,9 +201,19 @@
 }
 
 @keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  75% { transform: translateX(10px); }
+
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-10px);
+  }
+
+  75% {
+    transform: translateX(10px);
+  }
 }
 
 .auth-success {
@@ -216,10 +236,37 @@
 .admin-table-wrapper {
   overflow-x: auto;
   margin-top: 1.5rem;
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling on iOS */
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+  /* Space for scrollbar */
+}
+
+/* Custom Scrollbar for tables */
+.admin-table-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.admin-table-wrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 4px;
+}
+
+.admin-table-wrapper::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+.admin-table-wrapper::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .course-table {
   width: 100%;
+  min-width: 600px;
+  /* Ensure table doesn't squash too much */
   border-collapse: separate;
   border-spacing: 0;
   background: rgba(255, 255, 255, 0.03);
@@ -492,36 +539,51 @@
 
 /* ====================== RESPONSIVE ====================== */
 @media (max-width: 768px) {
+
   .admin-page-container,
   .course-list-container,
   .reports-container {
-    padding: 1rem;
+    padding: 1rem 0.5rem;
+    /* Reduce side padding */
   }
 
   .admin-page-title,
   .course-list-title,
   .reports-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
   }
 
   .admin-card {
-    padding: 1.5rem;
+    padding: 1.25rem;
+    border-radius: 16px;
   }
 
   .admin-form-row {
     grid-template-columns: 1fr;
+    gap: 0.75rem;
   }
 
   .course-form {
     grid-template-columns: 1fr;
+    padding: 1.25rem;
   }
 
   .reports-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 
   .report-value {
-    font-size: 2.5rem;
+    font-size: 2rem;
+  }
+
+  /* Adjust table cell padding */
+  .course-table th,
+  .course-table td {
+    padding: 0.75rem 1rem;
+    white-space: nowrap;
+    /* Prevent text wrapping in tight spaces */
   }
 }
 

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:5002/api'; // Thay port nếu cần
+const API_BASE_URL = `http://${window.location.hostname}:5050/api`;
 
 // Tạo instance axios
 const progressAPI = axios.create({

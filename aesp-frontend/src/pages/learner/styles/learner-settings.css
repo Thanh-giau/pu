@@ -1,0 +1,304 @@
+/* ===== learner-settings.css — Premium Glass Settings ===== */
+
+.st-page {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: rgba(226, 232, 240, .92);
+}
+
+.st-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.st-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+}
+
+.st-subtitle {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, .55);
+    margin: 6px 0 0;
+}
+
+.st-user-badge {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 16px;
+    padding: 12px 18px;
+}
+
+.st-user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+.st-user-label {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, .45);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.st-user-name {
+    font-weight: 700;
+    color: #fff;
+}
+
+.st-grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+.st-form-card {
+    background: rgba(255, 255, 255, .05);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 22px;
+    padding: 2rem;
+}
+
+.st-card-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+
+.st-field {
+    margin-bottom: 1.25rem;
+}
+
+.st-field label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, .6);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+}
+
+.st-field input,
+.st-field select,
+.st-field textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background: rgba(2, 6, 23, .5);
+    border: 1px solid rgba(255, 255, 255, .12);
+    border-radius: 14px;
+    color: #fff;
+    font-size: 0.92rem;
+    font-family: inherit;
+    outline: none;
+    transition: all 0.25s ease;
+    resize: vertical;
+}
+
+.st-field input:focus,
+.st-field select:focus,
+.st-field textarea:focus {
+    border-color: rgba(99, 102, 241, .5);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, .12);
+    transform: translateY(-1px);
+}
+
+.st-field select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='white' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 2.5rem;
+}
+
+.st-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.st-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.st-tag {
+    padding: 6px 14px;
+    background: rgba(99, 102, 241, .1);
+    border: 1px solid rgba(99, 102, 241, .25);
+    border-radius: 50px;
+    color: #c7d2fe;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.st-tag:hover {
+    background: rgba(99, 102, 241, .2);
+    border-color: rgba(99, 102, 241, .4);
+    transform: translateY(-1px);
+}
+
+.st-message {
+    padding: 12px 16px;
+    border-radius: 14px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.st-message.success {
+    background: rgba(16, 185, 129, .1);
+    border: 1px solid rgba(16, 185, 129, .3);
+    color: #6ee7b7;
+}
+
+.st-message.error {
+    background: rgba(239, 68, 68, .1);
+    border: 1px solid rgba(239, 68, 68, .3);
+    color: #fca5a5;
+}
+
+.st-save-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 6px 22px rgba(102, 126, 234, .35);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.st-save-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.st-save-btn:hover::before {
+    transform: translateX(100%);
+}
+
+.st-save-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, .45);
+}
+
+.st-save-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Sidebar */
+.st-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.st-info-card {
+    background: rgba(255, 255, 255, .05);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: 18px;
+    padding: 1.25rem;
+}
+
+.st-info-card h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 12px;
+}
+
+.st-info-card ul,
+.st-tip-card ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.st-info-card li,
+.st-tip-card li {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, .65);
+    line-height: 1.5;
+}
+
+.st-tip-card {
+    background: linear-gradient(135deg, rgba(16, 185, 129, .15), rgba(6, 182, 212, .15));
+    border: 1px solid rgba(16, 185, 129, .25);
+    border-radius: 18px;
+    padding: 1.25rem;
+}
+
+.st-tip-card h3 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #6ee7b7;
+    margin: 0 0 12px;
+}
+
+@media (max-width: 900px) {
+    .st-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .st-row {
+        grid-template-columns: 1fr;
+    }
+
+    .st-header {
+        flex-direction: column;
+    }
+}

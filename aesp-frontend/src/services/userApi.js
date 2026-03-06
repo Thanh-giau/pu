@@ -1,7 +1,7 @@
 // src/services/userApi.js
 import axios from "axios";
 
-const API_BASE = "http://localhost:5050";
+const API_BASE = `http://${window.location.hostname}:5050`;
 const STORAGE_KEY = "aesp_user";
 
 /* ==== LOCAL STORAGE USER ==== */
@@ -66,6 +66,13 @@ export const toggleUserActive = async (userId) => {
   const res = await axios.patch(
     `${API_BASE}/api/admin/users/${userId}/toggle-active`
   );
+  return res.data;
+  return res.data;
+};
+
+// Xóa tài khoản user
+export const deleteUser = async (userId) => {
+  const res = await axios.delete(`${API_BASE}/api/admin/users/${userId}`);
   return res.data;
 };
 

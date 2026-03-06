@@ -116,52 +116,54 @@ const PackageManagement = () => {
         <button onClick={handleAdd}>Thêm</button>
       </div>
 
-      <table className="course-table">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Tên khóa học</th>
-            <th>Mô tả</th>
-            <th>Giảng viên</th>
-            <th>Giá</th>
-            <th>Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-          {loading && (
+      <div className="admin-table-wrapper">
+        <table className="course-table">
+          <thead>
             <tr>
-              <td colSpan="6" style={{ textAlign: "center", padding: 12 }}>
-                Đang tải dữ liệu...
-              </td>
+              <th>ID</th>
+              <th>Tên khóa học</th>
+              <th>Mô tả</th>
+              <th>Giảng viên</th>
+              <th>Giá</th>
+              <th>Hành động</th>
             </tr>
-          )}
-          {!loading &&
-            courses.map((c) => (
-              <tr key={c.id}>
-                <td>{c.id}</td>
-                <td>{c.title}</td>
-                <td>{c.description}</td>
-                <td>{c.mentor_name}</td>
-                <td>{formatPrice(c.price)}</td>
-                <td>
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDelete(c.id)}
-                  >
-                    Xóa
-                  </button>
+          </thead>
+          <tbody>
+            {loading && (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center", padding: 12 }}>
+                  Đang tải dữ liệu...
                 </td>
               </tr>
-            ))}
-          {!loading && courses.length === 0 && (
-            <tr>
-              <td colSpan="6" style={{ textAlign: "center", padding: 12 }}>
-                Chưa có khóa học nào.
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
+            )}
+            {!loading &&
+              courses.map((c) => (
+                <tr key={c.id}>
+                  <td>{c.id}</td>
+                  <td>{c.title}</td>
+                  <td>{c.description}</td>
+                  <td>{c.mentor_name}</td>
+                  <td>{formatPrice(c.price)}</td>
+                  <td>
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDelete(c.id)}
+                    >
+                      Xóa
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            {!loading && courses.length === 0 && (
+              <tr>
+                <td colSpan="6" style={{ textAlign: "center", padding: 12 }}>
+                  Chưa có khóa học nào.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

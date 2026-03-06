@@ -68,59 +68,37 @@ const MentorManagement = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1 style={{ fontSize: "2.5rem", fontWeight: "800", color: "white" }}>
+    <div className="admin-page-container">
+      <h1 className="admin-page-title">
         Quản lý cố vấn
       </h1>
 
-      <p style={{ color: "#cbd5f5", marginTop: "0.5rem", marginBottom: "1.5rem" }}>
+      <p className="admin-card-subtitle">
         Quản trị viên có thể xem danh sách mentor và cập nhật kỹ năng để học viên lựa chọn.
       </p>
 
       {loading && <p style={{ color: "#cbd5e1" }}>Đang tải danh sách mentor...</p>}
 
       <div style={{ display: "flex", gap: "1.5rem", flexWrap: "wrap" }}>
-        <div style={{ flex: 1, minWidth: "320px" }}>
-          <table
-            style={{
-              width: "100%",
-              borderCollapse: "collapse",
-              background: "rgba(15,23,42,0.7)",
-              borderRadius: "12px",
-              overflow: "hidden",
-            }}
-          >
+        <div className="admin-table-wrapper" style={{ flex: 1, minWidth: "320px" }}>
+          <table className="course-table">
             <thead>
-              <tr
-                style={{ background: "rgba(15,23,42,0.9)", color: "#e5e7eb" }}
-              >
-                <th style={{ padding: "0.75rem 1rem", textAlign: "left" }}>
-                  Tên
-                </th>
-                <th style={{ padding: "0.75rem 1rem", textAlign: "left" }}>
-                  Kỹ năng
-                </th>
-                <th style={{ padding: "0.75rem 1rem", textAlign: "left" }}>
-                  Thao tác
-                </th>
+              <tr>
+                <th>Tên</th>
+                <th>Kỹ năng</th>
+                <th>Thao tác</th>
               </tr>
             </thead>
             <tbody>
               {mentors.map((m) => (
-                <tr
-                  key={m._id}
-                  style={{
-                    borderTop: "1px solid rgba(148,163,184,0.25)",
-                    color: "#e5e7eb",
-                  }}
-                >
-                  <td style={{ padding: "0.6rem 1rem" }}>{m.username}</td>
-                  <td style={{ padding: "0.6rem 1rem" }}>
+                <tr key={m._id}>
+                  <td>{m.username}</td>
+                  <td>
                     {(m.skills || []).length > 0
                       ? m.skills.join(", ")
                       : "Chưa thiết lập"}
                   </td>
-                  <td style={{ padding: "0.6rem 1rem" }}>
+                  <td>
                     <button
                       onClick={() => openSkillEditor(m)}
                       style={{
@@ -138,17 +116,9 @@ const MentorManagement = () => {
                   </td>
                 </tr>
               ))}
-
               {mentors.length === 0 && !loading && (
                 <tr>
-                  <td
-                    colSpan={3}
-                    style={{
-                      padding: "1rem",
-                      textAlign: "center",
-                      color: "#cbd5e1",
-                    }}
-                  >
+                  <td colSpan={3} style={{ textAlign: "center", padding: "1rem" }}>
                     Chưa có mentor nào.
                   </td>
                 </tr>
@@ -159,33 +129,18 @@ const MentorManagement = () => {
 
         {selected && (
           <div
+            className="admin-card"
             style={{
               flex: 1,
               minWidth: "260px",
-              background: "rgba(15,23,42,0.75)",
-              borderRadius: "12px",
-              padding: "1.5rem",
-              border: "1px solid rgba(148,163,184,0.2)",
               alignSelf: "flex-start",
+              border: "1px solid rgba(148,163,184,0.2)",
             }}
           >
-            <h3
-              style={{
-                color: "white",
-                fontSize: "1.1rem",
-                fontWeight: "700",
-                marginBottom: "0.75rem",
-              }}
-            >
+            <h3 className="admin-card-title" style={{ fontSize: "1.1rem" }}>
               Kỹ năng của: {selected.username}
             </h3>
-            <p
-              style={{
-                color: "#cbd5f5",
-                fontSize: "0.9rem",
-                marginBottom: "0.75rem",
-              }}
-            >
+            <p className="admin-card-subtitle" style={{ marginBottom: "0.75rem" }}>
               Nhập danh sách kỹ năng, cách nhau bởi dấu phẩy. Ví dụ:{" "}
               <em>IELTS, Speaking, Business English</em>
             </p>
@@ -193,14 +148,9 @@ const MentorManagement = () => {
               value={skillInput}
               onChange={(e) => setSkillInput(e.target.value)}
               rows={4}
+              className="auth-input"
               style={{
                 width: "100%",
-                background: "rgba(15,23,42,0.9)",
-                borderRadius: "8px",
-                border: "1px solid rgba(148,163,184,0.6)",
-                color: "white",
-                padding: "0.75rem 1rem",
-                fontSize: "0.95rem",
                 resize: "vertical",
                 marginBottom: "0.75rem",
               }}

@@ -1,57 +1,24 @@
 // src/pages/learner/Payment.jsx
 import React, { useEffect, useState } from "react";
-import { CreditCard, CheckCircle, AlertCircle, Clock } from "lucide-react";
+import {
+  CreditCard, CheckCircle, AlertCircle, Clock,
+  Wallet, Receipt, TrendingUp, Sparkles,
+} from "lucide-react";
 import { getPaymentsByUser, createPayment } from "../../services/paymentApi";
 import { getCurrentUser } from "../../services/userApi";
 import "./styles/learner-payment.css";
 
-
 const recommendedPackages = [
-  {
-    id: "P1",
-    name: "Gói 1 tháng",
-    price: 299000,
-    description: "Làm quen với nền tảng, luyện tập nhẹ nhàng mỗi ngày.",
-  },
-  {
-    id: "P3",
-    name: "Gói 3 tháng",
-    price: 799000,
-    description: "Tiết kiệm hơn, đủ thời gian để thấy tiến bộ.",
-  },
-  {
-    id: "P6",
-    name: "Gói 6 tháng",
-    price: 1499000,
-    description: "Lộ trình dài hơn cho mục tiêu giao tiếp.",
-  },
+  { id: "P1", name: "Gói 1 tháng", price: 299000, desc: "Làm quen với nền tảng, luyện tập nhẹ nhàng mỗi ngày.", color: "#818cf8" },
+  { id: "P3", name: "Gói 3 tháng", price: 799000, desc: "Tiết kiệm hơn, đủ thời gian để thấy tiến bộ.", color: "#34d399", popular: true },
+  { id: "P6", name: "Gói 6 tháng", price: 1499000, desc: "Lộ trình dài hơn cho mục tiêu giao tiếp.", color: "#f472b6" },
 ];
 
-const formatMoney = (n) => {
-  if (typeof n !== "number") return n;
-  return n.toLocaleString("vi-VN") + "d";
-};
-
-const getStatusIcon = (status) => {
-  switch (status) {
-    case "success":
-      return <CheckCircle className="w-5 h-5 text-emerald-400" />;
-    case "pending":
-      return <Clock className="w-5 h-5 text-amber-400" />;
-    default:
-      return <AlertCircle className="w-5 h-5 text-red-400" />;
-  }
-};
-
-const getStatusText = (status) => {
-  switch (status) {
-    case "success":
-      return "Thành công";
-    case "pending":
-      return "Đang xử lý";
-    default:
-      return "Thất bại";
-  }
+const fmt = (n) => (typeof n === "number" ? n.toLocaleString("vi-VN") + "đ" : n);
+const statusMap = {
+  success: { text: "Thành công", color: "#34d399", bg: "rgba(16,185,129,.12)" },
+  pending: { text: "Đang xử lý", color: "#fbbf24", bg: "rgba(245,158,11,.12)" },
+  failed: { text: "Thất bại", color: "#f87171", bg: "rgba(239,68,68,.12)" },
 };
 
 const Payment = () => {
@@ -65,192 +32,152 @@ const Payment = () => {
   const userId = user?._id || user?.id || user?.userId || null;
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (!userId) {
-        setLoading(false);
-        return;
-      }
+    if (!userId) { setLoading(false); return; }
+    (async () => {
       try {
-        setLoading(true);
-        setError("");
+        setLoading(true); setError("");
         const data = await getPaymentsByUser(userId);
         setTransactions(Array.isArray(data) ? data : []);
       } catch (err) {
         console.error("Lỗi tải lịch sử thanh toán:", err);
         setError("Không tải được lịch sử thanh toán.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+      } finally { setLoading(false); }
+    })();
   }, [userId]);
 
   const handlePay = async (pkg, method = "bank_transfer") => {
+    if (!userId) { alert("Vui lòng đăng nhập lại."); return; }
     try {
-      if (!userId) {
-        alert("Vui lòng đăng nhập lại.");
-        return;
-      }
-
-      setCreatingId(pkg.id);
-      setError("");
-
-      const result = await createPayment({
-        userId,
-        packageName: pkg.name,
-        amount: pkg.price,
-        currency: "VND",
-        method,
-      });
-
+      setCreatingId(pkg.id); setError("");
+      const result = await createPayment({ userId, packageName: pkg.name, amount: pkg.price, currency: "VND", method });
       if (result?.payment) {
         setTransactions((prev) => [result.payment, ...prev]);
-        alert("Tạo giao dịch thanh toán giả lập thành công.");
-      } else {
-        alert("Không nhận được dữ liệu thanh toán từ server.");
+        alert("Tạo giao dịch thanh toán giả lập thành công!");
       }
     } catch (err) {
-      console.error("Lỗi tạo thanh toán:", err);
+      console.error(err);
       alert("Thanh toán thất bại.");
-    } finally {
-      setCreatingId(null);
-    }
+    } finally { setCreatingId(null); }
   };
 
   if (!userId) {
-    return (
-      <div className="p-6 text-white">
-        <h2 className="text-2xl font-semibold mb-2">Thanh toán</h2>
-        <p>Vui lòng đăng nhập để xem và tạo thanh toán.</p>
-      </div>
-    );
+    return <div style={{ padding: 24, color: "rgba(255,255,255,.7)" }}>Vui lòng đăng nhập để xem thanh toán.</div>;
   }
 
-  const totalPaid = transactions
-    .filter((t) => t.status === "success")
-    .reduce((sum, t) => sum + (t.amount || 0), 0);
+  const totalPaid = transactions.filter((t) => t.status === "success").reduce((s, t) => s + (t.amount || 0), 0);
 
   return (
-    <div className="learner-payment p-6 space-y-8 text-white">
-      <div className="flex items-center gap-3 mb-2">
-        <CreditCard className="w-7 h-7 text-indigo-300" />
+    <div className="pay-page">
+      {/* Header */}
+      <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 8 }}>
+        <CreditCard size={28} style={{ color: "#818cf8" }} />
         <div>
-          <h2 className="text-2xl font-bold">Thanh toán</h2>
-          <p className="text-sm text-gray-300">
-            Quản lý gói học và lịch sử thanh toán giả lập.
-          </p>
+          <h2 className="pay-title">Thanh toán</h2>
+          <p className="pay-subtitle">Quản lý gói học và lịch sử giao dịch giả lập.</p>
         </div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-4">
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
-          <p className="text-sm text-gray-300">Tổng đã thanh toán</p>
-          <p className="text-2xl font-semibold mt-1">{formatMoney(totalPaid)}</p>
+      {/* Stats */}
+      <div className="pay-stats">
+        <div className="pay-stat-card">
+          <Wallet size={20} style={{ color: "#818cf8" }} />
+          <div>
+            <div className="pay-stat-label">Tổng đã thanh toán</div>
+            <div className="pay-stat-value">{fmt(totalPaid)}</div>
+          </div>
         </div>
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
-          <p className="text-sm text-gray-300">Số giao dịch</p>
-          <p className="text-2xl font-semibold mt-1">{transactions.length}</p>
+        <div className="pay-stat-card">
+          <Receipt size={20} style={{ color: "#34d399" }} />
+          <div>
+            <div className="pay-stat-label">Số giao dịch</div>
+            <div className="pay-stat-value">{transactions.length}</div>
+          </div>
         </div>
-        <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
-          <p className="text-sm text-gray-300">Giao dịch gần nhất</p>
-          <p className="text-lg font-semibold mt-1">
-            {transactions[0]
-              ? getStatusText(transactions[0].status)
-              : "Chưa có giao dịch"}
-          </p>
+        <div className="pay-stat-card">
+          <TrendingUp size={20} style={{ color: "#fbbf24" }} />
+          <div>
+            <div className="pay-stat-label">Giao dịch gần nhất</div>
+            <div className="pay-stat-value" style={{ fontSize: "1.1rem" }}>
+              {transactions[0] ? (statusMap[transactions[0].status]?.text || "—") : "Chưa có"}
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-        <h3 className="text-lg font-semibold mb-3">Gói học gợi ý</h3>
-        <p className="text-sm text-gray-300 mb-4">
-          Đây là thanh toán giả lập, chỉ lưu lại trong lịch sử để test giao diện.
-        </p>
-        <div className="grid md:grid-cols-3 gap-4">
+      {/* Packages */}
+      <div className="pay-glass-card">
+        <h3 className="pay-card-title"><Sparkles size={18} /> Gói học gợi ý</h3>
+        <p className="pay-card-desc">Thanh toán giả lập — chỉ lưu lại trong lịch sử để test.</p>
+        <div className="pay-pkg-grid">
           {recommendedPackages.map((pkg) => (
-            <div
-              key={pkg.id}
-              className="bg-white/5 border border-white/10 rounded-xl p-4 flex flex-col justify-between"
-            >
-              <div>
-                <h4 className="font-semibold mb-1">{pkg.name}</h4>
-                <p className="text-xl font-bold text-emerald-300 mb-1">
-                  {formatMoney(pkg.price)}
-                </p>
-                <p className="text-sm text-gray-300">{pkg.description}</p>
-              </div>
+            <div key={pkg.id} className={`pay-pkg ${pkg.popular ? "popular" : ""}`}>
+              {pkg.popular && <div className="pay-pkg-badge">Phổ biến</div>}
+              <h4 className="pay-pkg-name">{pkg.name}</h4>
+              <div className="pay-pkg-price" style={{ color: pkg.color }}>{fmt(pkg.price)}</div>
+              <p className="pay-pkg-desc">{pkg.desc}</p>
               <button
                 onClick={() => handlePay(pkg)}
                 disabled={creatingId === pkg.id}
-                className="mt-4 w-full inline-flex items-center justify-center px-3 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-sm font-medium disabled:opacity-60 disabled:cursor-not-allowed"
+                className="pay-pkg-btn"
+                style={{ "--accent": pkg.color }}
               >
-                {creatingId === pkg.id
-                  ? "Đang tạo giao dịch..."
-                  : "Thanh toán"}
+                {creatingId === pkg.id ? "Đang xử lý..." : "Thanh toán"}
               </button>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
-        <h3 className="text-lg font-semibold mb-3">Lịch sử thanh toán</h3>
+      {/* Transaction History */}
+      <div className="pay-glass-card" style={{ padding: 0, overflow: "hidden" }}>
+        <div style={{ padding: "1.25rem 1.5rem" }}>
+          <h3 className="pay-card-title"><Receipt size={18} /> Lịch sử thanh toán</h3>
+        </div>
 
-        {loading && <p>Đang tải lịch sử...</p>}
-
-        {error && !loading && (
-          <p className="text-sm text-red-300 mb-2">{error}</p>
-        )}
+        {error && <div className="pay-error">{error}</div>}
+        {loading && <p style={{ padding: "0 1.5rem 1.5rem", color: "rgba(255,255,255,.5)" }}>Đang tải...</p>}
 
         {!loading && transactions.length === 0 && !error && (
-          <p className="text-sm text-gray-300">
+          <p style={{ padding: "0 1.5rem 1.5rem", color: "rgba(255,255,255,.45)" }}>
             Chưa có giao dịch nào. Hãy thử tạo 1 thanh toán ở trên.
           </p>
         )}
 
         {!loading && transactions.length > 0 && (
-          <div className="overflow-x-auto mt-2">
-            <table className="min-w-full text-sm">
-              <thead>
-                <tr className="text-left text-gray-300 border-b border-white/10">
-                  <th className="py-2 pr-3">Mã giao dịch</th>
-                  <th className="py-2 pr-3">Gói học</th>
-                  <th className="py-2 pr-3">Số tiền</th>
-                  <th className="py-2 pr-3">Trạng thái</th>
-                  <th className="py-2 pr-3">Thời gian</th>
-                </tr>
-              </thead>
-              <tbody>
-                {transactions.map((t) => (
-                  <tr key={t._id} className="border-b border-white/5">
-                    <td className="py-2 pr-3 text-gray-100">
-                      {t.transactionId}
-                    </td>
-                    <td className="py-2 pr-3 text-gray-100">
-                      {t.packageName}
-                    </td>
-                    <td className="py-2 pr-3 text-gray-100">
-                      {formatMoney(t.amount)}
-                    </td>
-                    <td className="py-2 pr-3 flex items-center gap-2">
-                      {getStatusIcon(t.status)}
-                      <span className="text-gray-100">
-                        {getStatusText(t.status)}
+          <table className="pay-table">
+            <thead>
+              <tr>
+                <th>Mã giao dịch</th>
+                <th>Gói học</th>
+                <th>Số tiền</th>
+                <th>Trạng thái</th>
+                <th>Thời gian</th>
+              </tr>
+            </thead>
+            <tbody>
+              {transactions.map((t) => {
+                const st = statusMap[t.status] || statusMap.failed;
+                return (
+                  <tr key={t._id}>
+                    <td style={{ fontWeight: 600 }}>{t.transactionId}</td>
+                    <td>{t.packageName}</td>
+                    <td>{fmt(t.amount)}</td>
+                    <td>
+                      <span className="pay-status" style={{ color: st.color, background: st.bg }}>
+                        {st.text}
                       </span>
                     </td>
-                    <td className="py-2 pr-3 text-gray-300">
-                      {t.createdAt
-                        ? new Date(t.createdAt).toLocaleString("vi-VN")
-                        : ""}
+                    <td style={{ color: "rgba(255,255,255,.5)" }}>
+                      {t.createdAt ? new Date(t.createdAt).toLocaleString("vi-VN") : ""}
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                );
+              })}
+            </tbody>
+          </table>
         )}
       </div>
+
     </div>
   );
 };

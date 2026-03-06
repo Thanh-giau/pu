@@ -16,10 +16,10 @@ services:
       - "5050:5000"
     environment:
       - PORT=5000
-      - USER_SERVICE_URL=http://user-service:5000
+      - USER_SERVICE_URL=http://user-service:5001
       - LEARNING_SERVICE_URL=http://learning-service:5002
       - PAYMENT_SERVICE_URL=http://payment-service:5003
-      - AI_SERVICE_URL=http://ai-service:5000
+      - AI_SERVICE_URL=http://ai-service:5004
     depends_on:
       - user-service
       - learning-service
@@ -31,9 +31,9 @@ services:
   user-service:
     build: ./aesp-backend/user-service
     ports:
-      - "5000:5000"
+      - "5001:5001"
     environment:
-      - PORT=5000
+      - PORT=5001
       - MONGO_URI=mongodb://mongo:27017/aesp_user
       - ADMIN_USERNAME=admin
       - ADMIN_PASSWORD=Admin123
@@ -66,7 +66,7 @@ services:
   ai-service:
     build: ./aesp-backend/ai-service
     ports:
-      - "5004:5000"
+      - "5004:5004"
     volumes:
       - ./aesp-backend/ai-service:/app
 

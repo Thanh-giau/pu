@@ -1,10 +1,10 @@
+// src/pages/learner/Assessment.jsx
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser } from "../../services/userApi";
 import axios from "axios";
-import "./learner-pages.css";
+import { ClipboardCheck, ArrowLeft, Save, Star, Lightbulb, Mic, Target } from "lucide-react";
 import "./styles/learner-assessment.css";
-
 
 const API_BASE = "http://localhost:5050";
 
@@ -24,13 +24,11 @@ const Assessment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!userId) {
-      setMessage("Khong tim thay thong tin nguoi dung. Vui long dang nhap lai.");
+      setMessage("Không tìm thấy thông tin người dùng. Vui lòng đăng nhập lại.");
       return;
     }
-
     setSaving(true);
     setMessage("");
-
     try {
       await axios.post(`${API_BASE}/api/profile/${userId}/assessment`, {
         level,
@@ -39,203 +37,149 @@ const Assessment = () => {
         goal,
         focusTopics,
       });
-
-      setMessage("Da luu danh gia ban dau thanh cong.");
+      setMessage("✅ Đã lưu đánh giá ban đầu thành công!");
     } catch (err) {
       console.error(err);
-      setMessage("Loi khi luu danh gia. Vui long thu lai.");
+      setMessage("❌ Lỗi khi lưu đánh giá. Vui lòng thử lại.");
     } finally {
       setSaving(false);
     }
   };
 
+  const confidenceLabels = ["", "Rất ngại", "Hơi ngại", "Bình thường", "Khá tự tin", "Rất tự tin"];
+
   return (
-    <div className="learner-page-root learner-assessment space-y-8">
+    <div className="as-page">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="as-header">
         <div>
-          <h1 className="text-3xl font-extrabold text-white tracking-tight">
-            Đánh giá năng lực ban đầu
+          <h1 className="as-title">
+            <ClipboardCheck size={28} style={{ color: "#818cf8" }} />
+            Đánh giá năng lực
           </h1>
-          <p className="mt-2 text-slate-200/80 max-w-2xl text-sm">
-            Bài đánh giá này sẽ giúp hệ thống hiểu rõ hơn về trình độ và mục
-            tiêu học tập của bạn.
+          <p className="as-subtitle">
+            Bài đánh giá giúp AI hiểu rõ trình độ và mục tiêu của bạn.
           </p>
         </div>
-
-        <div className="bg-slate-900/60 border border-indigo-500/40 rounded-2xl px-6 py-4 text-right">
-          <div className="text-xs uppercase tracking-wide text-slate-400">
-            Tài khoản
+        <div className="as-user-badge">
+          <div className="as-user-avatar">
+            {(currentUser?.user?.username || currentUser?.username || "U")[0].toUpperCase()}
           </div>
-          <div className="text-white font-semibold">
-            {currentUser?.user?.username || currentUser?.username || "Hoc vien"}
-          </div>
-          <div className="mt-1 text-xs text-slate-400">
-            ID: {userId || "khong ro"}
+          <div>
+            <div className="as-user-label">Tài khoản</div>
+            <div className="as-user-name">
+              {currentUser?.user?.username || currentUser?.username || "Học viên"}
+            </div>
+            <div className="as-user-id">ID: {userId || "—"}</div>
           </div>
         </div>
       </div>
 
-      {/* Layout 2 cot */}
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
-        {/* Form chinh */}
-        <form
-          onSubmit={handleSubmit}
-          className="xl:col-span-2 bg-slate-900/70 border border-slate-700/80 rounded-2xl p-8 shadow-lg shadow-slate-900/40"
-        >
-          <div className="space-y-6">
-            {/* Trinh do hien tai */}
-            <div>
-              <label className="block text-sm font-medium text-slate-200 mb-2">
-                Trình độ hiện tại của bạn
-              </label>
-              <select
-                value={level}
-                onChange={(e) => setLevel(e.target.value)}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                required
-              >
-                <option value="">Chọn trình độ </option>
-                <option value="beginner">Mới bắt đầu </option>
-                <option value="elementary">Cơ bản </option>
-                <option value="intermediate">Trung binh</option>
-                <option value="upper_intermediate">Khá</option>
-                <option value="advanced">Nâng cao</option>
-              </select>
-            </div>
+      <div className="as-grid">
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="as-form-card">
+          <div className="as-field">
+            <label><Star size={14} /> Trình độ hiện tại</label>
+            <select value={level} onChange={(e) => setLevel(e.target.value)} required>
+              <option value="">Chọn trình độ</option>
+              <option value="beginner">Mới bắt đầu</option>
+              <option value="elementary">Cơ bản</option>
+              <option value="intermediate">Trung bình</option>
+              <option value="upper_intermediate">Khá</option>
+              <option value="advanced">Nâng cao</option>
+            </select>
+          </div>
 
-            {/* Diem phat am */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div>
-                <label className="block text-sm font-medium text-slate-200 mb-2">
-                    Điểm phát âm (0-100)
-                </label>
-                <div className="flex items-center gap-3">
-                  <input
-                    type="number"
-                    min="0"
-                    max="100"
-                    value={pronunciationScore}
-                    onChange={(e) => setPronunciationScore(e.target.value)}
-                    className="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-                    placeholder="Vi du 65"
-                  />
-                  <span className="text-xs text-slate-400">/100</span>
-                </div>
-              </div>
-
-              {/* Do tu tin */}
-              <div>
-                <label className="block text-sm font-medium text-slate-200 mb-2">
-                    Mức độ tự tin khi nói tiếng Anh
-                </label>
-                <div className="flex items-center gap-4">
-                  <input
-                    type="range"
-                    min="1"
-                    max="5"
-                    value={confidence}
-                    onChange={(e) => setConfidence(e.target.value)}
-                    className="flex-1 accent-indigo-500"
-                  />
-                  <div className="w-10 text-sm text-right text-indigo-300 font-semibold">
-                    {confidence}/5
-                  </div>
-                </div>
-                <div className="mt-1 flex justify-between text-xs text-slate-400">
-                  <span>Rất ngại nói</span>
-                  <span>Rất tự tin</span>
-                </div>
+          <div className="as-row">
+            <div className="as-field">
+              <label><Mic size={14} /> Điểm phát âm (0–100)</label>
+              <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                <input
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={pronunciationScore}
+                  onChange={(e) => setPronunciationScore(e.target.value)}
+                  placeholder="Ví dụ: 65"
+                />
+                <span style={{ color: "rgba(255,255,255,.4)", fontSize: "0.85rem" }}>/100</span>
               </div>
             </div>
-
-            {/* Muc tieu */}
-            <div>
-              <label className="block text-sm font-medium text-slate-200 mb-2">
-                Mục tiêu học tập chính của bạn là gì?
-              </label>
-              <textarea
-                value={goal}
-                onChange={(e) => setGoal(e.target.value)}
-                rows={3}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
-                placeholder="Vi du: thi IELTS 6.5, giao tiep cong viec, du hoc..."
+            <div className="as-field">
+              <label><Target size={14} /> Mức tự tin khi nói</label>
+              <input
+                type="range"
+                min="1"
+                max="5"
+                value={confidence}
+                onChange={(e) => setConfidence(e.target.value)}
+                className="as-range"
               />
-            </div>
-
-            {/* Chu de */}
-            <div>
-              <label className="block text-sm font-medium text-slate-200 mb-2">
-                Chủ đề hoặc lĩnh vực bạn quan tâm nhất là gì?
-              </label>
-              <textarea
-                value={focusTopics}
-                onChange={(e) => setFocusTopics(e.target.value)}
-                rows={3}
-                className="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 resize-none"
-                placeholder="Vi du: du lich, kinh doanh, IT, y te, phat bieu truoc dam dong..."
-              />
-            </div>
-
-            {/* Thong bao */}
-            {message && (
-              <div className="rounded-xl bg-slate-800 border border-slate-600 px-4 py-3 text-sm text-slate-100">
-                {message}
+              <div className="as-range-info">
+                <span>{confidenceLabels[confidence]}</span>
+                <span className="as-range-value">{confidence}/5</span>
               </div>
-            )}
-
-            {/* Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <button
-                type="button"
-                onClick={() => navigate("/learner")}
-                className="inline-flex items-center px-4 py-2.5 rounded-xl border border-slate-600 text-sm font-medium text-slate-200 hover:bg-slate-800 transition"
-              >
-                Quay lai dashboard
-              </button>
-              <button
-                type="submit"
-                disabled={saving}
-                className="inline-flex items-center px-6 py-2.5 rounded-xl text-sm font-semibold bg-indigo-500 hover:bg-indigo-600 text-white shadow-md shadow-indigo-500/40 disabled:opacity-60 disabled:cursor-not-allowed transition"
-              >
-                {saving ? "Dang luu..." : "Luu danh gia"}
-              </button>
             </div>
+          </div>
+
+          <div className="as-field">
+            <label><Target size={14} /> Mục tiêu học tập chính</label>
+            <textarea
+              value={goal}
+              onChange={(e) => setGoal(e.target.value)}
+              rows={3}
+              placeholder="Ví dụ: thi IELTS 6.5, giao tiếp công việc, du học..."
+            />
+          </div>
+
+          <div className="as-field">
+            <label><Lightbulb size={14} /> Chủ đề và lĩnh vực quan tâm</label>
+            <textarea
+              value={focusTopics}
+              onChange={(e) => setFocusTopics(e.target.value)}
+              rows={3}
+              placeholder="Ví dụ: du lịch, kinh doanh, IT, y tế, phát biểu trước đám đông..."
+            />
+          </div>
+
+          {message && (
+            <div className={`as-message ${message.startsWith("✅") ? "success" : "error"}`}>
+              {message}
+            </div>
+          )}
+
+          <div className="as-btn-row">
+            <button type="button" onClick={() => navigate("/learner")} className="as-back-btn">
+              <ArrowLeft size={16} /> Quay lại dashboard
+            </button>
+            <button type="submit" disabled={saving} className="as-save-btn">
+              <Save size={16} />
+              {saving ? "Đang lưu..." : "Lưu đánh giá"}
+            </button>
           </div>
         </form>
 
-        {/* Card ben phai */}
-        <div className="space-y-6">
-          <div className="bg-gradient-to-br from-indigo-500/80 via-violet-500/80 to-blue-500/80 rounded-2xl p-6 shadow-xl shadow-indigo-900/50 text-white">
-            <h3 className="text-lg font-semibold mb-2">
-                Tại sao cần đánh giá ban đầu?
-            </h3>
-            <p className="text-sm text-indigo-50/90">
-                Bài đánh giá ban đầu giúp hệ thống hiểu rõ hơn về trình độ và mục
-            </p>
-            <ul className="mt-4 space-y-2 text-sm text-indigo-50/90">
-              <li>• Đề xuất gói học phù hợp</li>
-              <li>• Tính toán độ khó bài nói</li>
-              <li>• Theo dõi tiến độ thời gian</li>
+        {/* Sidebar */}
+        <div className="as-sidebar">
+          <div className="as-why-card">
+            <h3>🎯 Tại sao cần đánh giá?</h3>
+            <ul>
+              <li>Đề xuất gói học phù hợp</li>
+              <li>Tính toán độ khó bài nói</li>
+              <li>Theo dõi tiến độ theo thời gian</li>
             </ul>
           </div>
-
-          <div className="bg-slate-900/70 border border-slate-700 rounded-2xl p-5 text-sm text-slate-200 space-y-3">
-            <h4 className="font-semibold text-slate-100">
-                Mẹo để hoàn thành bài đánh giá tốt nhất
-            </h4>
-            <ul className="space-y-1.5 text-slate-300 text-xs">
-              <li>• Nhớ lại những tình huống bạn thường dùng tiếng anh.</li>
-              <li>
-                • Tự hỏi: Mình muốn đạt được điều gì khi học tiếng Anh?
-              </li>
-              <li>
-                • Nếu không chắc chắn về trình độ, hãy chọn mức thấp hơn một chút.
-              </li>
+          <div className="as-tip-card">
+            <h3>💡 Mẹo làm bài tốt</h3>
+            <ul>
+              <li>Nhớ lại tình huống bạn thường dùng tiếng Anh</li>
+              <li>Tự hỏi: Mình muốn đạt được gì?</li>
+              <li>Nếu không chắc, chọn mức thấp hơn một chút</li>
             </ul>
           </div>
         </div>
       </div>
+
     </div>
   );
 };

@@ -5,6 +5,7 @@ import {
   getAdminUsers,
   createUserByAdmin,
   toggleUserActive,
+  deleteUser,
 } from "../../services/userApi";
 
 const UserManagement = () => {
@@ -78,6 +79,26 @@ const UserManagement = () => {
     } catch (err) {
       console.error("Lỗi toggle active:", err);
       setErrorMsg("Không đổi trạng thái tài khoản được.");
+    }
+  };
+
+  const handleDeleteUser = async (user) => {
+    if (!window.confirm(`Bạn có chắc muốn xóa người dùng "${user.username}" không? Hành động này không thể hoàn tác.`)) {
+      return;
+    }
+
+    setErrorMsg("");
+    setSuccessMsg("");
+
+    const id = user._id || user.id;
+    try {
+      await deleteUser(id);
+      setSuccessMsg("Đã xóa người dùng thành công.");
+      // Cập nhật lại danh sách user để STT tự động tính lại
+      setUsers((prev) => prev.filter((u) => (u._id || u.id) !== id));
+    } catch (err) {
+      console.error("Lỗi xóa user:", err);
+      setErrorMsg("Không thể xóa người dùng. Có thể do ràng buộc dữ liệu.");
     }
   };
 
@@ -178,16 +199,29 @@ const UserManagement = () => {
                             Không xóa được
                           </button>
                         ) : (
-                          <button
-                            className="delete-btn"
-                            style={{
-                              backgroundColor: isActive ? "#f97316" : "#22c55e",
-                              borderColor: "transparent",
-                            }}
-                            onClick={() => handleToggleActive(user)}
-                          >
-                            {isActive ? "Khóa" : "Mở khóa"}
-                          </button>
+                          <div style={{ display: "flex", gap: "0.5rem" }}>
+                            <button
+                              className="delete-btn"
+                              style={{
+                                backgroundColor: isActive ? "#f97316" : "#22c55e",
+                                borderColor: "transparent",
+                                minWidth: "80px"
+                              }}
+                              onClick={() => handleToggleActive(user)}
+                            >
+                              {isActive ? "Khóa" : "Mở khóa"}
+                            </button>
+                            <button
+                              className="delete-btn"
+                              onClick={() => handleDeleteUser(user)}
+                              style={{
+                                background: "linear-gradient(135deg, #ef4444, #dc2626)",
+                                minWidth: "60px"
+                              }}
+                            >
+                              Xóa
+                            </button>
+                          </div>
                         )}
                       </td>
                     </tr>

@@ -9,7 +9,8 @@ const app = express();
 const PORT = process.env.PORT || 5050;
 
 // Dùng localhost khi chạy local, có thể override bằng env khi dùng Docker
-const AI_SERVICE_URL = process.env.AI_SERVICE_URL || "http://localhost:5003";
+// Dùng localhost khi chạy local, có thể override bằng env khi dùng Docker
+const AI_SERVICE_URL = process.env.AI_SERVICE_URL || "http://localhost:5004";
 const USER_SERVICE_URL =
   process.env.USER_SERVICE_URL || "http://localhost:5001";
 const LEARNING_SERVICE_URL =
@@ -124,10 +125,22 @@ app.patch("/api/admin/users/:id/toggle-active", async (req, res) => {
     res.json(response.data);
   } catch (error) {
     console.error("Lỗi gateway admin toggle:", error.message);
+  });
+  }
+});
+
+app.delete("/api/admin/users/:id", async (req, res) => {
+  const url = `${USER_SERVICE_URL}/api/admin/users/${req.params.id}`;
+  try {
+    console.log("Gateway -> DELETE admin user:", url);
+    const response = await axios.delete(url);
+    res.json(response.data);
+  } catch (error) {
+    console.error("Lỗi gateway admin delete user:", error.message);
     res
       .status(error.response?.status || 500)
       .json(error.response?.data || {
-        message: "Lỗi gateway admin toggle",
+        message: "Lỗi gateway admin delete user",
       });
   }
 });
@@ -242,6 +255,28 @@ app.get("/api/enrollments/check", async (req, res) => {
       .status(error.response?.status || 500)
       .json(error.response?.data || {
         message: "Lỗi gateway check enrollment",
+      });
+  }
+});
+
+// 6.5 Progress (Learning Service)
+app.use("/api/progress", async (req, res) => {
+  const url = `${LEARNING_SERVICE_URL}/api/progress${req.url}`;
+  try {
+    console.log(`Gateway -> ${req.method} progress:`, url);
+    const response = await axios({
+      method: req.method,
+      url: url,
+      data: req.body,
+      params: req.query,
+    });
+    res.json(response.data);
+  } catch (error) {
+    console.error("Lỗi gateway progress:", error.message);
+    res
+      .status(error.response?.status || 500)
+      .json(error.response?.data || {
+        message: "Lỗi gateway progress",
       });
   }
 });

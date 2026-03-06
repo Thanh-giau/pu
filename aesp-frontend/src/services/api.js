@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Cổng Gateway chuẩn
-const API_BASE_URL = 'http://localhost:5050';
+const API_BASE_URL = `http://${window.location.hostname}:5050`;
 
 const api = axios.create({
   baseURL: API_BASE_URL,

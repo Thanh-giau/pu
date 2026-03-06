@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Tao 1 instance axios voi baseURL la gateway
 const API = axios.create({
-  baseURL: "http://localhost:5050/api/ai",
+  baseURL: `http://${window.location.hostname}:5050/api/ai`,
 });
 
 // Phan tich 1 cau (neu ban con dung o noi khac)
